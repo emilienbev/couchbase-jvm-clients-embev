@@ -18,7 +18,7 @@ package com.couchbase.client.tracing.opentelemetry;
 
 import com.couchbase.client.core.cnc.RequestSpan;
 import com.couchbase.client.core.cnc.RequestTracer;
-import com.couchbase.client.core.deps.io.opentelemetry.instrumentation.grpc.v1_6.GrpcTelemetry;
+import io.opentelemetry.instrumentation.grpc.v1_6.GrpcTelemetry;
 import com.couchbase.client.core.env.CoreEnvironment;
 import com.couchbase.client.core.error.TracerException;
 import com.couchbase.client.core.protostellar.GrpcAwareRequestTracer;
@@ -164,11 +164,11 @@ public class OpenTelemetryRequestTracer implements RequestTracer, GrpcAwareReque
   }
 
   @Override
-  public void registerGrpc(com.couchbase.client.core.deps.io.grpc.ManagedChannelBuilder<?> builder) {
+  public void registerGrpc(io.grpc.ManagedChannelBuilder<?> builder) {
     if (openTelemetry != null) {
-      com.couchbase.client.core.deps.io.opentelemetry.instrumentation.grpc.v1_6.GrpcTelemetry grpcTelemetry =
+      io.opentelemetry.instrumentation.grpc.v1_6.GrpcTelemetry grpcTelemetry =
         GrpcTelemetry.create(openTelemetry);
-      com.couchbase.client.core.deps.io.grpc.ClientInterceptor interceptor = grpcTelemetry.newClientInterceptor();
+      io.grpc.ClientInterceptor interceptor = grpcTelemetry.newClientInterceptor();
 
       builder.intercept(interceptor);
     }

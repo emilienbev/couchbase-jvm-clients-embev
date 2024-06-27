@@ -21,7 +21,7 @@ import com.couchbase.client.core.cnc.RequestSpan;
 import com.couchbase.client.core.cnc.RequestTracer;
 import com.couchbase.client.core.cnc.TracingIdentifiers;
 import com.couchbase.client.core.cnc.events.tracing.OverThresholdRequestsRecordedEvent;
-import com.couchbase.client.core.deps.org.jctools.queues.MpscArrayQueue;
+import org.jctools.queues.MpscArrayQueue;
 import com.couchbase.client.core.env.ThresholdLoggingTracerConfig;
 import com.couchbase.client.core.error.TracerException;
 import com.couchbase.client.core.msg.Request;

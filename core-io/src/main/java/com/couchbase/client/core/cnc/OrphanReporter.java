@@ -20,7 +20,7 @@ import com.couchbase.client.core.annotation.Stability;
 import com.couchbase.client.core.cnc.events.tracing.OrphanRecordDroppedEvent;
 import com.couchbase.client.core.cnc.events.tracing.OrphanReporterFailureDetectedEvent;
 import com.couchbase.client.core.cnc.events.tracing.OrphansRecordedEvent;
-import com.couchbase.client.core.deps.org.jctools.queues.MpscArrayQueue;
+import org.jctools.queues.MpscArrayQueue;
 import com.couchbase.client.core.env.OrphanReporterConfig;
 import com.couchbase.client.core.msg.Request;
 import com.couchbase.client.core.msg.UnmonitoredRequest;

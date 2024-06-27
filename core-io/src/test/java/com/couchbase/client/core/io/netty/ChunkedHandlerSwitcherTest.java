@@ -16,9 +16,9 @@
 
 package com.couchbase.client.core.io.netty;
 
-import com.couchbase.client.core.deps.io.netty.channel.embedded.EmbeddedChannel;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpObjectAggregator;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.channel.embedded.EmbeddedChannel;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import com.couchbase.client.core.endpoint.BaseEndpoint;
 import com.couchbase.client.core.endpoint.EndpointContext;
 import com.couchbase.client.core.endpoint.http.CoreHttpRequest;

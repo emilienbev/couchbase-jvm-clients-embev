@@ -17,7 +17,7 @@
 package com.couchbase.client.core.manager.bucket;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import static java.util.Objects.requireNonNull;
 

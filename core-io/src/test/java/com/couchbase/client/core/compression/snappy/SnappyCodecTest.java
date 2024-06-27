@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.compression.snappy;
 
-import com.couchbase.client.core.deps.org.iq80.snappy.Snappy;
+import org.iq80.snappy.Snappy;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;

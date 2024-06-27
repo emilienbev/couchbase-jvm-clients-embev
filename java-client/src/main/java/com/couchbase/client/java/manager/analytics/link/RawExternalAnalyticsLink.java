@@ -17,8 +17,8 @@
 package com.couchbase.client.java.manager.analytics.link;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonCreator;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.Map;
 import java.util.Optional;

@@ -16,14 +16,14 @@
 
 package com.couchbase.client.core.io.netty;
 
-import com.couchbase.client.core.deps.io.netty.channel.embedded.EmbeddedChannel;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.DefaultFullHttpResponse;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.FullHttpRequest;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.FullHttpResponse;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpObjectAggregator;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponseStatus;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpVersion;
+import io.netty.channel.embedded.EmbeddedChannel;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.HttpMethod;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 import com.couchbase.client.core.endpoint.BaseEndpoint;
 import com.couchbase.client.core.endpoint.EndpointContext;
 import com.couchbase.client.core.endpoint.http.CoreCommonOptions;

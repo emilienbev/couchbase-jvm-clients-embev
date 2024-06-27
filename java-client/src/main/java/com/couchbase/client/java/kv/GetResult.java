@@ -17,9 +17,9 @@
 package com.couchbase.client.java.kv;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBufUtil;
-import com.couchbase.client.core.deps.io.netty.buffer.Unpooled;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.Unpooled;
 import com.couchbase.client.core.error.CasMismatchException;
 import com.couchbase.client.core.msg.kv.CodecFlags;
 import com.couchbase.client.core.api.kv.CoreGetResult;

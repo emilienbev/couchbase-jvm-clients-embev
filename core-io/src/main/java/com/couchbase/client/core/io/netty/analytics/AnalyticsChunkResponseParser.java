@@ -17,7 +17,7 @@
 package com.couchbase.client.core.io.netty.analytics;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import com.couchbase.client.core.error.AuthenticationFailureException;
 import com.couchbase.client.core.error.CompilationFailureException;
 import com.couchbase.client.core.error.CoreErrorCodeAndMessageException;

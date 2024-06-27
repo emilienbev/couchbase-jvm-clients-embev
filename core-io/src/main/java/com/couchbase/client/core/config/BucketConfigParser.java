@@ -19,8 +19,8 @@ package com.couchbase.client.core.config;
 import com.couchbase.client.core.env.CoreEnvironment;
 import com.couchbase.client.core.error.CouchbaseException;
 import com.couchbase.client.core.json.Mapper;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.DeserializationFeature;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.InjectableValues;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.InjectableValues;
 
 import java.io.IOException;
 

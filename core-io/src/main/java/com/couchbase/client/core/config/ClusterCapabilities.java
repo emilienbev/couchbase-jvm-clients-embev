@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.config;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Contains all the cluster capabilities this SDK supports (depending on the server version, the cluster may

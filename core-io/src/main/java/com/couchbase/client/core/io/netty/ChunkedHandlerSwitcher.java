@@ -16,10 +16,10 @@
 
 package com.couchbase.client.core.io.netty;
 
-import com.couchbase.client.core.deps.io.netty.channel.ChannelDuplexHandler;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelHandlerContext;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelInboundHandler;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelPromise;
+import io.netty.channel.ChannelDuplexHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandler;
+import io.netty.channel.ChannelPromise;
 import com.couchbase.client.core.io.netty.chunk.ChunkedMessageHandler;
 import com.couchbase.client.core.msg.Request;
 

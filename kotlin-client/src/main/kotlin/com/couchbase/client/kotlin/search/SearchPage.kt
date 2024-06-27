@@ -18,7 +18,7 @@ package com.couchbase.client.kotlin.search
 
 import com.couchbase.client.core.annotation.SinceCouchbase
 import com.couchbase.client.core.api.search.CoreSearchKeyset
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.core.type.TypeReference
 import com.couchbase.client.core.json.Mapper
 
 /**

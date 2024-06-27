@@ -17,16 +17,16 @@ package com.couchbase.client.core.protostellar;
 
 import com.couchbase.client.core.CoreProtostellar;
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.google.protobuf.Any;
-import com.couchbase.client.core.deps.com.google.protobuf.ByteString;
-import com.couchbase.client.core.deps.com.google.protobuf.InvalidProtocolBufferException;
-import com.couchbase.client.core.deps.com.google.rpc.DebugInfo;
-import com.couchbase.client.core.deps.com.google.rpc.ErrorInfo;
-import com.couchbase.client.core.deps.com.google.rpc.PreconditionFailure;
-import com.couchbase.client.core.deps.com.google.rpc.RequestInfo;
-import com.couchbase.client.core.deps.com.google.rpc.ResourceInfo;
-import com.couchbase.client.core.deps.io.grpc.StatusRuntimeException;
-import com.couchbase.client.core.deps.io.grpc.protobuf.StatusProto;
+import com.google.protobuf.Any;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.rpc.DebugInfo;
+import com.google.rpc.ErrorInfo;
+import com.google.rpc.PreconditionFailure;
+import com.google.rpc.RequestInfo;
+import com.google.rpc.ResourceInfo;
+import io.grpc.StatusRuntimeException;
+import io.grpc.protobuf.StatusProto;
 import com.couchbase.client.core.error.AmbiguousTimeoutException;
 import com.couchbase.client.core.error.AuthenticationFailureException;
 import com.couchbase.client.core.error.BucketExistsException;
@@ -71,7 +71,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-import static com.couchbase.client.core.deps.io.grpc.Status.Code;
+import static io.grpc.Status.Code;
 
 @Stability.Internal
 public class CoreProtostellarErrorHandlingUtil {
@@ -112,7 +112,7 @@ public class CoreProtostellarErrorHandlingUtil {
     if (t instanceof StatusRuntimeException) {
       // https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto
       StatusRuntimeException sre = (StatusRuntimeException) t;
-      com.couchbase.client.core.deps.com.google.rpc.Status status = StatusProto.fromThrowable(sre);
+      com.google.rpc.Status status = StatusProto.fromThrowable(sre);
       return convertStatus(core, request, sre, status);
     } else if (t instanceof RuntimeException) {
       return ProtostellarRequestBehaviour.fail((RuntimeException) t);
@@ -125,13 +125,13 @@ public class CoreProtostellarErrorHandlingUtil {
   public static ProtostellarRequestBehaviour convertStatus(CoreProtostellar core,
                                                            ProtostellarRequest<?> request,
                                                            @Nullable StatusRuntimeException t,
-                                                           com.couchbase.client.core.deps.com.google.rpc.Status status) {
+                                                           com.google.rpc.Status status) {
     GenericErrorContext context = request.context();
 
-    com.couchbase.client.core.deps.io.grpc.Status.Code code = Code.UNKNOWN;
+    io.grpc.Status.Code code = Code.UNKNOWN;
 
     if (t != null) {
-      com.couchbase.client.core.deps.io.grpc.Status stat = t.getStatus();
+      io.grpc.Status stat = t.getStatus();
       code = stat.getCode();
       context.put("lastException", t.getMessage());
     } else {

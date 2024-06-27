@@ -17,9 +17,9 @@
 package com.couchbase.client.java.encryption.databind.jackson.repackaged;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.Version;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.BeanProperty;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.BeanProperty;
+import com.fasterxml.jackson.databind.Module;
 import com.couchbase.client.core.util.CbAnnotations;
 import com.couchbase.client.core.encryption.CryptoManager;
 import com.couchbase.client.java.encryption.annotation.Encrypted;

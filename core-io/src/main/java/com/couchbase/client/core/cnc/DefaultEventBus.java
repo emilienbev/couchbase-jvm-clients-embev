@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.cnc;
 
-import com.couchbase.client.core.deps.org.jctools.queues.MpscArrayQueue;
+import org.jctools.queues.MpscArrayQueue;
 import com.couchbase.client.core.json.Mapper;
 import com.couchbase.client.core.util.CbCollections;
 import com.couchbase.client.core.util.NanoTimestamp;

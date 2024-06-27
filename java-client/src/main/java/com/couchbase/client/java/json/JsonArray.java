@@ -17,7 +17,7 @@
 package com.couchbase.client.java.json;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.couchbase.client.core.error.InvalidArgumentException;
 
 import java.io.Serializable;

@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.cnc;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.couchbase.client.core.json.Mapper;
 
 import java.util.Map;

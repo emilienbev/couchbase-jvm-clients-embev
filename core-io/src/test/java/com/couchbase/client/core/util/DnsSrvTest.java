@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.util;
 
-import com.couchbase.client.core.deps.org.xbill.DNS.lookup.ServerFailedException;
+import org.xbill.DNS.lookup.ServerFailedException;
 import org.junit.jupiter.api.Test;
 
 import javax.naming.NameNotFoundException;

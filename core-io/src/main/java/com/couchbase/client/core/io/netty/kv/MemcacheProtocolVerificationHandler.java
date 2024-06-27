@@ -17,14 +17,14 @@
 package com.couchbase.client.core.io.netty.kv;
 
 import com.couchbase.client.core.cnc.events.io.InvalidPacketDetectedEvent;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.ByteBufUtil;
 import com.couchbase.client.core.endpoint.EndpointContext;
 import com.couchbase.client.core.io.IoContext;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelDuplexHandler;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelHandlerContext;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelPromise;
-import com.couchbase.client.core.deps.io.netty.util.ReferenceCountUtil;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelDuplexHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelPromise;
+import io.netty.util.ReferenceCountUtil;
 
 import static com.couchbase.client.core.io.netty.kv.MemcacheProtocol.verifyRequest;
 import static com.couchbase.client.core.io.netty.kv.MemcacheProtocol.verifyResponse;

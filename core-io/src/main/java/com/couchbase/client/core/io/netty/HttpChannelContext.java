@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.io.netty;
 
-import com.couchbase.client.core.deps.io.netty.channel.ChannelId;
+import io.netty.channel.ChannelId;
 
 public class HttpChannelContext {
 

@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.io.netty.search;
 
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import com.couchbase.client.core.endpoint.BaseEndpoint;
 import com.couchbase.client.core.error.CouchbaseException;
 import com.couchbase.client.core.error.IndexExistsException;

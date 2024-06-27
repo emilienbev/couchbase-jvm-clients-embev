@@ -18,7 +18,7 @@ package com.couchbase.client.java.manager.search;
 
 import com.couchbase.client.core.api.CoreCouchbaseOps;
 import com.couchbase.client.core.api.manager.search.CoreSearchIndexManager;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.couchbase.client.core.error.DecodingFailureException;
 import com.couchbase.client.core.json.Mapper;
 import com.couchbase.client.core.util.PreventsGarbageCollection;

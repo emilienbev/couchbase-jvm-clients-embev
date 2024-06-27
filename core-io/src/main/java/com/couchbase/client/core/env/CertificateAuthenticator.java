@@ -17,8 +17,8 @@
 package com.couchbase.client.core.env;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.grpc.CallCredentials;
-import com.couchbase.client.core.deps.io.netty.handler.ssl.SslContextBuilder;
+import io.grpc.CallCredentials;
+import io.netty.handler.ssl.SslContextBuilder;
 import com.couchbase.client.core.error.FeatureNotAvailableException;
 import com.couchbase.client.core.error.InvalidArgumentException;
 import reactor.util.annotation.Nullable;

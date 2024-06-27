@@ -18,7 +18,7 @@ package com.couchbase.client.core.compression.snappy;
 
 // CHECKSTYLE:OFF IllegalImport - Codecs are allowed to access Snappy library
 
-import com.couchbase.client.core.deps.org.iq80.snappy.Snappy;
+import org.iq80.snappy.Snappy;
 
 /**
  * Backed by orq.io80.snappy version >= 0.5 (not vulnerable to CVE-2024-36124).

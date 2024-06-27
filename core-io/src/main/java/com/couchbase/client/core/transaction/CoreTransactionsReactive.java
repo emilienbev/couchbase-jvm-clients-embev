@@ -27,7 +27,7 @@ import com.couchbase.client.core.api.query.CoreReactiveQueryResult;
 import com.couchbase.client.core.classic.query.ClassicCoreReactiveQueryResult;
 import com.couchbase.client.core.cnc.RequestSpan;
 import com.couchbase.client.core.cnc.TracingIdentifiers;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.TextNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.couchbase.client.core.error.transaction.internal.CoreTransactionCommitAmbiguousException;
 import com.couchbase.client.core.error.transaction.internal.CoreTransactionExpiredException;
 import com.couchbase.client.core.error.transaction.TransactionOperationFailedException;

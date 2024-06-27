@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.json.stream;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.JsonToken;
 
 import java.io.IOException;
 import java.util.ArrayDeque;

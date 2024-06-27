@@ -16,12 +16,12 @@
 package com.couchbase.client.core.env;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.grpc.CallCredentials;
-import com.couchbase.client.core.deps.io.grpc.Metadata;
-import com.couchbase.client.core.deps.io.grpc.Status;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelPipeline;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpHeaderNames;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpRequest;
+import io.grpc.CallCredentials;
+import io.grpc.Metadata;
+import io.grpc.Status;
+import io.netty.channel.ChannelPipeline;
+import io.netty.handler.codec.http.HttpHeaderNames;
+import io.netty.handler.codec.http.HttpRequest;
 import com.couchbase.client.core.endpoint.EndpointContext;
 import com.couchbase.client.core.io.netty.kv.SaslAuthenticationHandler;
 import com.couchbase.client.core.io.netty.kv.SaslListMechanismsHandler;
@@ -35,7 +35,7 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
-import static com.couchbase.client.core.deps.io.grpc.Metadata.ASCII_STRING_MARSHALLER;
+import static io.grpc.Metadata.ASCII_STRING_MARSHALLER;
 import static com.couchbase.client.core.io.netty.kv.sasl.SaslHelper.platformHasSaslPlain;
 import static com.couchbase.client.core.util.CbCollections.setCopyOf;
 import static com.couchbase.client.core.util.CbCollections.setOf;

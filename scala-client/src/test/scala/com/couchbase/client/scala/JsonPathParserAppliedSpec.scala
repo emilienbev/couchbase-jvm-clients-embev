@@ -15,7 +15,7 @@
  */
 package com.couchbase.client.scala
 
-import com.couchbase.client.core.deps.io.netty.util.CharsetUtil
+import io.netty.util.CharsetUtil
 import com.couchbase.client.scala.codec.Conversions
 import com.couchbase.client.scala.json.{JsonArray, JsonObject}
 import com.couchbase.client.scala.kv.ProjectionsApplier

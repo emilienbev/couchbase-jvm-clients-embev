@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <shaded.package.prefix>com.couchbase.client.core.deps.</shaded.package.prefix>
+<!--        <shaded.package.prefix>com.couchbase.client.core.deps.</shaded.package.prefix>-->
     </properties>
 
     <dependencies>
@@ -42,37 +42,37 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <relocations>
-                        <!-- For tracing-opentelemetry, we need to combine the user's unshaded OpenTelemetry object, with a shaded
-                         ManagedChannelBuilder, via the GRPC instrumentation library.  The only solution that works is to
-                         a) include the instrumentation library in a separate tracing-opentelemeytry-deps so it can be shaded, and b) shade
-                         only these packages - so that the shaded instrumentation library continues to depend on unshaded io.opentelemetry.OpenTelemetry -->
-                        <relocation>
-                            <pattern>io.opentelemetry.instrumentation.grpc</pattern>
-                            <shadedPattern>${shaded.package.prefix}io.opentelemetry.instrumentation.grpc</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>io.grpc</pattern>
-                            <shadedPattern>${shaded.package.prefix}io.grpc</shadedPattern>
-                        </relocation>
-                    </relocations>
-                    <createSourcesJar>true</createSourcesJar>
-                    <shadeSourcesContent>true</shadeSourcesContent>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-shade-plugin</artifactId>-->
+<!--                <version>3.3.0</version>-->
+<!--                <configuration>-->
+<!--                    <relocations>-->
+<!--                        &lt;!&ndash; For tracing-opentelemetry, we need to combine the user's unshaded OpenTelemetry object, with a shaded-->
+<!--                         ManagedChannelBuilder, via the GRPC instrumentation library.  The only solution that works is to-->
+<!--                         a) include the instrumentation library in a separate tracing-opentelemeytry-deps so it can be shaded, and b) shade-->
+<!--                         only these packages - so that the shaded instrumentation library continues to depend on unshaded io.opentelemetry.OpenTelemetry &ndash;&gt;-->
+<!--                        <relocation>-->
+<!--                            <pattern>io.opentelemetry.instrumentation.grpc</pattern>-->
+<!--                            <shadedPattern>${shaded.package.prefix}io.opentelemetry.instrumentation.grpc</shadedPattern>-->
+<!--                        </relocation>-->
+<!--                        <relocation>-->
+<!--                            <pattern>io.grpc</pattern>-->
+<!--                            <shadedPattern>${shaded.package.prefix}io.grpc</shadedPattern>-->
+<!--                        </relocation>-->
+<!--                    </relocations>-->
+<!--                    <createSourcesJar>true</createSourcesJar>-->
+<!--                    <shadeSourcesContent>true</shadeSourcesContent>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>shade</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.json.stream;
 
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBuf;
 
 import java.io.Closeable;
 

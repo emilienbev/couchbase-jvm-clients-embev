@@ -39,7 +39,7 @@ import com.couchbase.client.core.config.loader.KeyValueBucketLoader;
 import com.couchbase.client.core.config.refresher.ClusterManagerBucketRefresher;
 import com.couchbase.client.core.config.refresher.GlobalRefresher;
 import com.couchbase.client.core.config.refresher.KeyValueBucketRefresher;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.couchbase.client.core.env.CoreEnvironment;
 import com.couchbase.client.core.env.NetworkResolution;
 import com.couchbase.client.core.env.SeedNode;

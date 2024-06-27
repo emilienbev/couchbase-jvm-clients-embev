@@ -17,8 +17,8 @@
 package com.couchbase.client.core.env;
 
 import com.couchbase.client.core.cnc.SimpleEventBus;
-import com.couchbase.client.core.deps.io.netty.channel.embedded.EmbeddedChannel;
-import com.couchbase.client.core.deps.io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import io.netty.channel.embedded.EmbeddedChannel;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import com.couchbase.client.core.endpoint.EndpointContext;
 import com.couchbase.client.core.io.netty.kv.SaslAuthenticationHandler;
 import org.junit.jupiter.api.AfterAll;

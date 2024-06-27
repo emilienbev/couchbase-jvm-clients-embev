@@ -23,7 +23,7 @@ import com.couchbase.client.core.annotation.Stability;
 import com.couchbase.client.core.config.CollectionsManifest;
 import com.couchbase.client.core.config.CollectionsManifestCollection;
 import com.couchbase.client.core.config.CollectionsManifestScope;
-import com.couchbase.client.core.deps.com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.couchbase.client.protostellar.admin.collection.v1.CreateCollectionResponse;
 import com.couchbase.client.protostellar.admin.collection.v1.CreateScopeResponse;
 import com.couchbase.client.protostellar.admin.collection.v1.DeleteCollectionResponse;

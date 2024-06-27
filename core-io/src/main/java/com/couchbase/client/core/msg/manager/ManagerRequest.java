@@ -16,11 +16,11 @@
 
 package com.couchbase.client.core.msg.manager;
 
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponse;
+import io.netty.handler.codec.http.HttpResponse;
 import com.couchbase.client.core.msg.Encodable;
 import com.couchbase.client.core.msg.Request;
 import com.couchbase.client.core.msg.Response;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpRequest;
 
 /**
  * Parent interface for all requests going to the cluster manager.

@@ -16,7 +16,7 @@
 package com.couchbase.client.scala.env
 
 import com.couchbase.client.core
-import com.couchbase.client.core.deps.io.netty.channel.EventLoopGroup
+import io.netty.channel.EventLoopGroup
 
 /** Holds all IO-related configuration and state.
   *

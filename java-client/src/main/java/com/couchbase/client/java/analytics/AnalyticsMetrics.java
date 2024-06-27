@@ -16,8 +16,8 @@
 
 package com.couchbase.client.java.analytics;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonProcessingException;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.couchbase.client.core.error.DecodingFailureException;
 import com.couchbase.client.core.json.Mapper;
 import com.couchbase.client.core.util.Golang;

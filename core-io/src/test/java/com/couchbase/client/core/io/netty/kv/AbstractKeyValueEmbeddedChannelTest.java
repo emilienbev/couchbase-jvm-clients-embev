@@ -17,8 +17,8 @@
 package com.couchbase.client.core.io.netty.kv;
 
 import com.couchbase.client.core.cnc.SimpleEventBus;
-import com.couchbase.client.core.deps.io.netty.channel.embedded.EmbeddedChannel;
-import com.couchbase.client.core.deps.io.netty.util.ResourceLeakDetector;
+import io.netty.channel.embedded.EmbeddedChannel;
+import io.netty.util.ResourceLeakDetector;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 

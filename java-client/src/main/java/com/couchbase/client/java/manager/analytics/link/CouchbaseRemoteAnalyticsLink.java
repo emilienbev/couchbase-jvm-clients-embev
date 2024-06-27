@@ -16,11 +16,11 @@
 
 package com.couchbase.client.java.manager.analytics.link;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonAlias;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-import static com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 import static java.util.Objects.requireNonNull;
 
 /**

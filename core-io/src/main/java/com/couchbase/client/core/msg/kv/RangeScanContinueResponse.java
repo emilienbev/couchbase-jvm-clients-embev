@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.msg.kv;
 
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBuf;
 import com.couchbase.client.core.io.netty.kv.MemcacheProtocol;
 import com.couchbase.client.core.kv.CoreRangeScanItem;
 import com.couchbase.client.core.kv.LastCoreRangeScanItem;

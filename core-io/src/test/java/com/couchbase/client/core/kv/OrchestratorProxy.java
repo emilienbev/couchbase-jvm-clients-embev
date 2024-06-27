@@ -23,7 +23,7 @@ import com.couchbase.client.core.config.BucketCapabilities;
 import com.couchbase.client.core.config.ClusterConfig;
 import com.couchbase.client.core.config.ConfigurationProvider;
 import com.couchbase.client.core.config.CouchbaseBucketConfig;
-import com.couchbase.client.core.deps.io.netty.buffer.Unpooled;
+import io.netty.buffer.Unpooled;
 import com.couchbase.client.core.env.CoreEnvironment;
 import com.couchbase.client.core.io.CollectionIdentifier;
 import com.couchbase.client.core.msg.ResponseStatus;

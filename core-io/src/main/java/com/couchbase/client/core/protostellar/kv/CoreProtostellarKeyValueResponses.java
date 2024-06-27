@@ -27,7 +27,7 @@ import com.couchbase.client.core.api.kv.CoreSubdocGetResult;
 import com.couchbase.client.core.api.kv.CoreSubdocMutateCommand;
 import com.couchbase.client.core.api.kv.CoreSubdocMutateResult;
 import com.couchbase.client.core.compression.snappy.SnappyCodec;
-import com.couchbase.client.core.deps.com.google.protobuf.ByteString;
+import com.google.protobuf.ByteString;
 import com.couchbase.client.core.error.CouchbaseException;
 import com.couchbase.client.core.error.subdoc.PathNotFoundException;
 import com.couchbase.client.core.msg.kv.MutationToken;
@@ -177,7 +177,7 @@ public class CoreProtostellarKeyValueResponses {
     for (int i = 0; i < response.getSpecsList().size(); i++) {
       CoreSubdocGetCommand original = specs.get(i);
       LookupInResponse.Spec resp = response.getSpecsList().get(i);
-      com.couchbase.client.core.deps.com.google.rpc.Status status = resp.getStatus();
+      com.google.rpc.Status status = resp.getStatus();
       ProtostellarRequestBehaviour behaviour = CoreProtostellarErrorHandlingUtil.convertStatus(core, request, null, status);
 
       boolean isFailedExists = original.type() == SubdocCommandType.EXISTS && resp.getContent().toStringUtf8().equalsIgnoreCase("false");

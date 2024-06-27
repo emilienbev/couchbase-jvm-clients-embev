@@ -21,9 +21,9 @@ import com.couchbase.client.core.env.TimerConfig;
 import com.couchbase.client.core.msg.CancellationReason;
 import com.couchbase.client.core.msg.Request;
 import com.couchbase.client.core.msg.Response;
-import com.couchbase.client.core.deps.io.netty.util.HashedWheelTimer;
-import com.couchbase.client.core.deps.io.netty.util.Timeout;
-import com.couchbase.client.core.deps.io.netty.util.concurrent.DefaultThreadFactory;
+import io.netty.util.HashedWheelTimer;
+import io.netty.util.Timeout;
+import io.netty.util.concurrent.DefaultThreadFactory;
 
 import java.time.Duration;
 import java.util.ArrayList;

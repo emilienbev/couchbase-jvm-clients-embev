@@ -17,7 +17,7 @@
 package com.couchbase.client.java.manager.bucket;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * @deprecated Please use {@link EvictionPolicyType} instead.

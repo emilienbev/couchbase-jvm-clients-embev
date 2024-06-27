@@ -22,7 +22,7 @@ import com.couchbase.client.core.cnc.Meter;
 import com.couchbase.client.core.cnc.TracingIdentifiers;
 import com.couchbase.client.core.cnc.ValueRecorder;
 import com.couchbase.client.core.cnc.events.metrics.LatencyMetricsAggregatedEvent;
-import com.couchbase.client.core.deps.org.HdrHistogram.Histogram;
+import org.HdrHistogram.Histogram;
 import com.couchbase.client.core.env.LoggingMeterConfig;
 import com.couchbase.client.core.error.MeterException;
 import reactor.core.publisher.Mono;

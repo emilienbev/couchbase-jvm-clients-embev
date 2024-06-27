@@ -16,7 +16,7 @@
 
 package com.couchbase.client.java.manager.analytics;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.couchbase.client.core.error.DatasetExistsException;
 import com.couchbase.client.core.error.DatasetNotFoundException;
 import com.couchbase.client.core.error.DataverseExistsException;

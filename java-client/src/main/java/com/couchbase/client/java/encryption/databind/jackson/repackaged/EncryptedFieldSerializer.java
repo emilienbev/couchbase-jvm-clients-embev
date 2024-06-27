@@ -17,10 +17,10 @@
 package com.couchbase.client.java.encryption.databind.jackson.repackaged;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonGenerator;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonSerializer;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.SerializerProvider;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.couchbase.client.core.encryption.CryptoManager;
 import com.couchbase.client.java.encryption.annotation.Encrypted;
 

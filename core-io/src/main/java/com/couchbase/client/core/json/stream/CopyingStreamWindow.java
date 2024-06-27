@@ -16,8 +16,8 @@
 
 package com.couchbase.client.core.json.stream;
 
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 

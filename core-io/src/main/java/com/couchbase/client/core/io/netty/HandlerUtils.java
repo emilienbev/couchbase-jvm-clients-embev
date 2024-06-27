@@ -17,7 +17,7 @@
 package com.couchbase.client.core.io.netty;
 
 import com.couchbase.client.core.cnc.events.io.ChannelClosedProactivelyEvent;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelHandlerContext;
 import com.couchbase.client.core.io.IoContext;
 
 /**

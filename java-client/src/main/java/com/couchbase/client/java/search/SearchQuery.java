@@ -18,7 +18,7 @@ package com.couchbase.client.java.search;
 import com.couchbase.client.core.annotation.SinceCouchbase;
 import com.couchbase.client.core.annotation.Stability;
 import com.couchbase.client.core.api.search.CoreSearchQuery;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.couchbase.client.core.json.Mapper;
 import com.couchbase.client.java.json.JsonObject;
 import com.couchbase.client.java.search.queries.BooleanFieldQuery;

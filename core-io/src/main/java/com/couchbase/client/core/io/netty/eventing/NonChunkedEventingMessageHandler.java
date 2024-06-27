@@ -15,8 +15,8 @@
  */
 
 package com.couchbase.client.core.io.netty.eventing;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponseStatus;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import com.couchbase.client.core.endpoint.BaseEndpoint;
 import com.couchbase.client.core.error.*;
 import com.couchbase.client.core.error.context.EventingErrorContext;

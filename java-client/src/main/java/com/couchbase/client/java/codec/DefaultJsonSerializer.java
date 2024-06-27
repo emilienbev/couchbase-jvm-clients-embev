@@ -16,8 +16,8 @@
 
 package com.couchbase.client.java.codec;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JavaType;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.couchbase.client.core.encryption.CryptoManager;
 import com.couchbase.client.core.error.DecodingFailureException;
 import com.couchbase.client.core.error.EncodingFailureException;

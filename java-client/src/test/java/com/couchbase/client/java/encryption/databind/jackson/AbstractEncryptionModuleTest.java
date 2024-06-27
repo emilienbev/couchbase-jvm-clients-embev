@@ -141,7 +141,7 @@ public abstract class AbstractEncryptionModuleTest {
 
     public AnnotatedGetterImmutable(
         @com.fasterxml.jackson.annotation.JsonProperty("maxim")
-        @com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty("maxim")
+//        @com.fasterxml.jackson.annotation.JsonProperty("maxim")
             String maxim) {
       this.maxim = maxim;
     }
@@ -208,7 +208,7 @@ public abstract class AbstractEncryptionModuleTest {
 
     public AnnotatedGetterImmutableMeta(
         @com.fasterxml.jackson.annotation.JsonProperty("maxim")
-        @com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty("maxim")
+//        @com.fasterxml.jackson.annotation.JsonProperty("maxim")
             String maxim) {
       this.maxim = maxim;
     }

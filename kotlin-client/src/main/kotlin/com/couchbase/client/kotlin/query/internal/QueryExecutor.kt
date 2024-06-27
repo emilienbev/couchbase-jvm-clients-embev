@@ -22,9 +22,9 @@ import com.couchbase.client.core.api.query.CoreQueryOptions
 import com.couchbase.client.core.api.query.CoreQueryProfile
 import com.couchbase.client.core.api.query.CoreQueryScanConsistency
 import com.couchbase.client.core.api.shared.CoreMutationState
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ArrayNode
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.node.ArrayNode
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.couchbase.client.core.endpoint.http.CoreCommonOptions
 import com.couchbase.client.core.json.Mapper
 import com.couchbase.client.core.transaction.config.CoreSingleQueryTransactionOptions

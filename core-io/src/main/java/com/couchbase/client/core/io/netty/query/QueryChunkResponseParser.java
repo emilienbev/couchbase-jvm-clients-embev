@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.io.netty.query;
 
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponse;
+import io.netty.handler.codec.http.HttpResponse;
 import com.couchbase.client.core.error.AuthenticationFailureException;
 import com.couchbase.client.core.error.CasMismatchException;
 import com.couchbase.client.core.error.CouchbaseException;

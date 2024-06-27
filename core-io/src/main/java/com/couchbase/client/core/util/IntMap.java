@@ -17,8 +17,8 @@
 package com.couchbase.client.core.util;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.netty.util.collection.IntObjectHashMap;
-import com.couchbase.client.core.deps.io.netty.util.collection.IntObjectMap;
+import io.netty.util.collection.IntObjectHashMap;
+import io.netty.util.collection.IntObjectMap;
 import reactor.util.annotation.Nullable;
 
 import java.util.Arrays;

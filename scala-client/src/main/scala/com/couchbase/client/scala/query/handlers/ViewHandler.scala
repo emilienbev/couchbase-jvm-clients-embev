@@ -17,7 +17,7 @@
 package com.couchbase.client.scala.query.handlers
 
 import com.couchbase.client.core.Core
-import com.couchbase.client.core.deps.io.netty.util.CharsetUtil
+import io.netty.util.CharsetUtil
 import com.couchbase.client.core.msg.query.QueryRequest
 import com.couchbase.client.scala.env.ClusterEnvironment
 import com.couchbase.client.scala.query.QueryOptions

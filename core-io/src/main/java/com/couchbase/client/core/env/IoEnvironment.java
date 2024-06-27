@@ -17,13 +17,13 @@
 package com.couchbase.client.core.env;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.netty.channel.EventLoopGroup;
-import com.couchbase.client.core.deps.io.netty.channel.epoll.Epoll;
-import com.couchbase.client.core.deps.io.netty.channel.epoll.EpollEventLoopGroup;
-import com.couchbase.client.core.deps.io.netty.channel.kqueue.KQueue;
-import com.couchbase.client.core.deps.io.netty.channel.kqueue.KQueueEventLoopGroup;
-import com.couchbase.client.core.deps.io.netty.channel.nio.NioEventLoopGroup;
-import com.couchbase.client.core.deps.io.netty.util.concurrent.DefaultThreadFactory;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.epoll.Epoll;
+import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.kqueue.KQueue;
+import io.netty.channel.kqueue.KQueueEventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.util.concurrent.DefaultThreadFactory;
 import com.couchbase.client.core.error.InvalidArgumentException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -69,7 +69,7 @@ import static com.couchbase.client.core.util.Validators.notNull;
 public class IoEnvironment {
 
   static {
-    final String samplingProperty = "com.couchbase.client.core.deps.io.netty.leakDetection.samplingInterval";
+    final String samplingProperty = "io.netty.leakDetection.samplingInterval";
     final long defaultSamplingInterval = 65536;
 
     if (isNullOrEmpty(System.getProperty(samplingProperty))) {

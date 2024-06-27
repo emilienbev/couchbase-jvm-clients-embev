@@ -16,7 +16,7 @@
 
 package com.couchbase.client.kotlin.env.dsl
 
-import com.couchbase.client.core.deps.io.netty.channel.EventLoopGroup
+import io.netty.channel.EventLoopGroup
 import com.couchbase.client.core.env.IoEnvironment
 import com.couchbase.client.core.env.IoEnvironment.DEFAULT_EVENT_LOOP_THREAD_COUNT
 import com.couchbase.client.core.env.IoEnvironment.DEFAULT_NATIVE_IO_ENABLED

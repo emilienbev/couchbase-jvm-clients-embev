@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.logging;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Wraps a piece of information that is subject to log redaction.

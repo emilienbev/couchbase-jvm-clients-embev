@@ -16,10 +16,10 @@
 
 package com.couchbase.client.core.config;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JacksonInject;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonCreator;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.couchbase.client.core.service.ServiceType;
 
 import java.util.ArrayList;

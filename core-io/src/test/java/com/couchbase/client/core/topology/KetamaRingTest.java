@@ -16,10 +16,10 @@
 
 package com.couchbase.client.core.topology;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.DeserializationFeature;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.SerializationFeature;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

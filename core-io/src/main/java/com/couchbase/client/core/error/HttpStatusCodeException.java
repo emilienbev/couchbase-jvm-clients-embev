@@ -17,7 +17,7 @@
 package com.couchbase.client.core.error;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import com.couchbase.client.core.error.context.ErrorContext;
 import com.couchbase.client.core.error.context.GenericHttpRequestErrorContext;
 import com.couchbase.client.core.io.netty.HttpProtocol;

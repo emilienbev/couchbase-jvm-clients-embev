@@ -16,9 +16,9 @@
 
 package com.couchbase.client.core.io.netty.chunk;
 
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelConfig;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponse;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelConfig;
+import io.netty.handler.codec.http.HttpResponse;
 import com.couchbase.client.core.error.CouchbaseException;
 import com.couchbase.client.core.msg.RequestContext;
 import com.couchbase.client.core.msg.chunk.ChunkHeader;

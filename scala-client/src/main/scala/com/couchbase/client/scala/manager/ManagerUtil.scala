@@ -18,8 +18,8 @@ package com.couchbase.client.scala.manager
 import java.nio.charset.StandardCharsets.UTF_8
 
 import com.couchbase.client.core.Core
-import com.couchbase.client.core.deps.io.netty.buffer.Unpooled
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.{
+import io.netty.buffer.Unpooled
+import io.netty.handler.codec.http.{
   DefaultFullHttpRequest,
   HttpHeaderValues,
   HttpMethod,

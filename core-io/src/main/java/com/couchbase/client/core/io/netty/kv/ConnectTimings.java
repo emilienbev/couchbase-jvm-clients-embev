@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.io.netty.kv;
 
-import com.couchbase.client.core.deps.io.netty.channel.Channel;
+import io.netty.channel.Channel;
 import com.couchbase.client.core.util.NanoTimestamp;
 
 import java.time.Duration;

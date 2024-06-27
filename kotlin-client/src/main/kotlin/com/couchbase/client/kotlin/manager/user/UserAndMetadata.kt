@@ -16,7 +16,7 @@
 
 package com.couchbase.client.kotlin.manager.user
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.node.ObjectNode
 import java.time.Instant
 
 /**

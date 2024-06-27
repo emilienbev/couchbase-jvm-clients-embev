@@ -16,8 +16,8 @@
 
 package com.couchbase.client.core.kv;
 
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 
 /**
  * Encapsulates an ID returned by the server for each stream.

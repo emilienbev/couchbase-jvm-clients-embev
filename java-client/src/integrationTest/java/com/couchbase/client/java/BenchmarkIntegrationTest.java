@@ -16,8 +16,8 @@
 
 package com.couchbase.client.java;
 
-import com.couchbase.client.core.deps.org.HdrHistogram.Histogram;
-import com.couchbase.client.core.deps.org.LatencyUtils.LatencyStats;
+import org.HdrHistogram.Histogram;
+import org.LatencyUtils.LatencyStats;
 import com.couchbase.client.core.endpoint.ProtostellarEndpoint;
 import com.couchbase.client.core.env.CouchbaseForkPoolThreadFactory;
 import com.couchbase.client.core.error.TimeoutException;

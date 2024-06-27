@@ -17,7 +17,7 @@ package com.couchbase.client.core.transaction.forwards;
 
 import com.couchbase.client.core.Core;
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.couchbase.client.core.error.transaction.ForwardCompatibilityFailureException;
 import com.couchbase.client.core.error.transaction.internal.ForwardCompatibilityRequiresRetryException;
 import com.couchbase.client.core.transaction.log.CoreTransactionLogger;

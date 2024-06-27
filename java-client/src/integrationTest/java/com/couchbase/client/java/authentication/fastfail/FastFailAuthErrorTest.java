@@ -16,7 +16,7 @@
 
 package com.couchbase.client.java.authentication.fastfail;
 
-import com.couchbase.client.core.deps.io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import com.couchbase.client.core.diagnostics.AuthenticationStatus;
 import com.couchbase.client.core.diagnostics.EndpointDiagnostics;
 import com.couchbase.client.core.error.AuthenticationFailureException;

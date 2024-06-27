@@ -16,8 +16,8 @@
 package com.couchbase.client.java.json;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.ObjectMapper;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.module.afterburner.AfterburnerModule;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 
 @Stability.Internal
 public class JacksonTransformers {

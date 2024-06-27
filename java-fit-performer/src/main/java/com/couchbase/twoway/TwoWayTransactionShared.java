@@ -20,7 +20,7 @@ import com.couchbase.InternalPerformerFailure;
 import com.couchbase.JavaSdkCommandExecutor;
 import com.couchbase.client.core.cnc.EventSubscription;
 import com.couchbase.client.core.cnc.RequestSpan;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.couchbase.client.core.error.DecodingFailureException;
 import com.couchbase.client.core.error.DocumentExistsException;
 import com.couchbase.client.core.error.DocumentNotFoundException;

@@ -17,8 +17,8 @@
 package com.couchbase.client.kotlin.manager.search
 
 import com.couchbase.client.core.api.manager.search.CoreSearchIndexManager
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ArrayNode
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.node.ArrayNode
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.couchbase.client.core.error.IndexExistsException
 import com.couchbase.client.core.error.IndexNotFoundException
 import com.couchbase.client.core.json.Mapper

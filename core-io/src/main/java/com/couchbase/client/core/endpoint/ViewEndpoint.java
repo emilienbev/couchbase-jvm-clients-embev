@@ -19,8 +19,8 @@ package com.couchbase.client.core.endpoint;
 import com.couchbase.client.core.io.netty.view.ViewHandlerSwitcher;
 import com.couchbase.client.core.service.ServiceContext;
 import com.couchbase.client.core.service.ServiceType;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelPipeline;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpClientCodec;
+import io.netty.channel.ChannelPipeline;
+import io.netty.handler.codec.http.HttpClientCodec;
 
 public class ViewEndpoint extends BaseEndpoint {
 

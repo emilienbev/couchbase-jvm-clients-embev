@@ -22,7 +22,7 @@ import com.couchbase.client.core.api.query.CoreQueryOptions;
 import com.couchbase.client.core.cnc.CbTracing;
 import com.couchbase.client.core.cnc.RequestSpan;
 import com.couchbase.client.core.cnc.TracingIdentifiers;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.couchbase.client.core.error.CouchbaseException;
 import com.couchbase.client.core.error.EncodingFailureException;
 import com.couchbase.client.core.json.Mapper;

@@ -18,8 +18,8 @@ package com.couchbase.client.scala.manager.view
 import java.nio.charset.StandardCharsets.UTF_8
 import com.couchbase.client.core.{Core, CoreProtostellar}
 import com.couchbase.client.core.api.CoreCouchbaseOps
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode
-import com.couchbase.client.core.deps.io.netty.handler.codec.http._
+import com.fasterxml.jackson.databind.node.ObjectNode
+import io.netty.handler.codec.http._
 import com.couchbase.client.core.endpoint.http.{
   CoreCommonOptions,
   CoreHttpClient,

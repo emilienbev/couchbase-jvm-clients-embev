@@ -18,8 +18,8 @@ package com.couchbase.client.scala.manager.user
 
 import com.couchbase.client.core.Core
 import com.couchbase.client.core.api.CoreCouchbaseOps
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod.GET
+import io.netty.handler.codec.http.HttpMethod
+import io.netty.handler.codec.http.HttpMethod.GET
 import com.couchbase.client.core.error.{GroupNotFoundException, UserNotFoundException}
 import com.couchbase.client.core.logging.RedactableArgument.{redactMeta, redactSystem, redactUser}
 import com.couchbase.client.core.msg.ResponseStatus

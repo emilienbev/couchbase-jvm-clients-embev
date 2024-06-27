@@ -16,7 +16,7 @@
 
 package com.couchbase.client.java.manager.eventing;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The compound status an eventing function can be in at any given point in time.

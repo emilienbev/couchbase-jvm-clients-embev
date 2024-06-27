@@ -17,7 +17,7 @@
 package com.couchbase.client.core.msg;
 
 import com.couchbase.client.core.CoreContext;
-import com.couchbase.client.core.deps.io.netty.util.Timeout;
+import io.netty.util.Timeout;
 import com.couchbase.client.core.retry.BestEffortRetryStrategy;
 import com.couchbase.client.core.service.ServiceType;
 import org.junit.jupiter.api.Test;

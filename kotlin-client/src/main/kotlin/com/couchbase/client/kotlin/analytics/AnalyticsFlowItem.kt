@@ -16,7 +16,7 @@
 
 package com.couchbase.client.kotlin.analytics
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.core.type.TypeReference
 import com.couchbase.client.core.error.ErrorCodeAndMessage
 import com.couchbase.client.core.json.Mapper
 import com.couchbase.client.core.msg.analytics.AnalyticsChunkHeader

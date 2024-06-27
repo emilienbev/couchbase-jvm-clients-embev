@@ -16,9 +16,9 @@
 package com.couchbase.client.core.endpoint;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.grpc.Attributes;
-import com.couchbase.client.core.deps.io.grpc.EquivalentAddressGroup;
-import com.couchbase.client.core.deps.io.grpc.NameResolver;
+import io.grpc.Attributes;
+import io.grpc.EquivalentAddressGroup;
+import io.grpc.NameResolver;
 
 import java.net.URI;
 import java.util.List;

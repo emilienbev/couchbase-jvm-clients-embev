@@ -17,14 +17,14 @@
 package com.couchbase.client.core.util;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.org.xbill.DNS.ExtendedResolver;
-import com.couchbase.client.core.deps.org.xbill.DNS.Name;
-import com.couchbase.client.core.deps.org.xbill.DNS.ResolverConfig;
-import com.couchbase.client.core.deps.org.xbill.DNS.SRVRecord;
-import com.couchbase.client.core.deps.org.xbill.DNS.TextParseException;
-import com.couchbase.client.core.deps.org.xbill.DNS.Type;
-import com.couchbase.client.core.deps.org.xbill.DNS.lookup.LookupSession;
-import com.couchbase.client.core.deps.org.xbill.DNS.lookup.NoSuchDomainException;
+import org.xbill.DNS.ExtendedResolver;
+import org.xbill.DNS.Name;
+import org.xbill.DNS.ResolverConfig;
+import org.xbill.DNS.SRVRecord;
+import org.xbill.DNS.TextParseException;
+import org.xbill.DNS.Type;
+import org.xbill.DNS.lookup.LookupSession;
+import org.xbill.DNS.lookup.NoSuchDomainException;
 import reactor.core.publisher.Mono;
 import reactor.util.annotation.Nullable;
 

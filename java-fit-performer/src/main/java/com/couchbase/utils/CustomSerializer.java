@@ -16,7 +16,7 @@
 package com.couchbase.utils;
 
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.couchbase.client.core.error.DecodingFailureException;
 import com.couchbase.client.core.json.Mapper;
 import com.couchbase.client.java.codec.JsonSerializer;

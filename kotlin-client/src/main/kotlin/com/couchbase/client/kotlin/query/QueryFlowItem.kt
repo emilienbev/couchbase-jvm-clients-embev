@@ -18,7 +18,7 @@ package com.couchbase.client.kotlin.query
 
 import com.couchbase.client.core.api.query.CoreQueryMetaData
 import com.couchbase.client.core.classic.query.ClassicCoreQueryMetaData
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.core.type.TypeReference
 import com.couchbase.client.core.json.Mapper
 import com.couchbase.client.core.msg.query.QueryChunkHeader
 import com.couchbase.client.core.msg.query.QueryChunkTrailer

@@ -16,8 +16,8 @@
 
 package com.couchbase.client.java.encryption.databind.jackson.repackaged;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.couchbase.client.java.encryption.databind.jackson.AbstractEncryptionModuleTest;
 import org.junit.jupiter.api.BeforeAll;
 

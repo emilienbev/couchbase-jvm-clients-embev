@@ -1,6 +1,6 @@
 package com.couchbase.client.scala.subdoc
 
-import com.couchbase.client.core.deps.io.netty.util.CharsetUtil
+import io.netty.util.CharsetUtil
 import com.couchbase.client.core.error.{DecodingFailureException, InvalidArgumentException}
 import com.couchbase.client.core.error.subdoc.PathNotFoundException
 import com.couchbase.client.core.service.ServiceType

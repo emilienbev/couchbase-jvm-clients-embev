@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.io.netty.search;
 
-import com.couchbase.client.core.deps.io.netty.util.CharsetUtil;
+import io.netty.util.CharsetUtil;
 import com.couchbase.client.core.error.AuthenticationFailureException;
 import com.couchbase.client.core.error.CouchbaseException;
 import com.couchbase.client.core.error.IndexNotFoundException;

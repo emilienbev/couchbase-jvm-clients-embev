@@ -24,7 +24,7 @@ import com.couchbase.client.core.api.search.facet.CoreSearchFacet;
 import com.couchbase.client.core.api.search.sort.CoreSearchSort;
 import com.couchbase.client.core.api.search.sort.CoreSearchSortString;
 import com.couchbase.client.core.api.shared.CoreMutationState;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.couchbase.client.core.endpoint.http.CoreCommonOptions;
 import com.couchbase.client.core.error.InvalidArgumentException;
 import com.couchbase.client.java.CommonOptions;

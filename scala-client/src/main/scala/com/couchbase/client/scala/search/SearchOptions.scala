@@ -24,7 +24,7 @@ import com.couchbase.client.core.api.search.{
 }
 import com.couchbase.client.core.api.shared.CoreMutationState
 import com.couchbase.client.core.cnc.RequestSpan
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.JsonNode
 import com.couchbase.client.core.endpoint.http.CoreCommonOptions
 import com.couchbase.client.core.json.Mapper
 import com.couchbase.client.core.retry.RetryStrategy

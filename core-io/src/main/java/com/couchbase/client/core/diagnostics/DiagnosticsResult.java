@@ -16,7 +16,7 @@
 package com.couchbase.client.core.diagnostics;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.couchbase.client.core.endpoint.EndpointState;
 import com.couchbase.client.core.error.EncodingFailureException;
 import com.couchbase.client.core.json.Mapper;

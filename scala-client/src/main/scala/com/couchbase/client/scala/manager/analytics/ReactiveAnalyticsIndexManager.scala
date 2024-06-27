@@ -16,7 +16,7 @@
 package com.couchbase.client.scala.manager.analytics
 
 import com.couchbase.client.core.cnc.RequestSpan
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponseStatus
+import io.netty.handler.codec.http.HttpResponseStatus
 import com.couchbase.client.core.error.{FeatureNotAvailableException, HttpStatusCodeException}
 import com.couchbase.client.core.logging.RedactableArgument.redactMeta
 import com.couchbase.client.core.retry.RetryStrategy

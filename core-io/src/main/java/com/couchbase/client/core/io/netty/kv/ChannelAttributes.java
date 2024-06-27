@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.io.netty.kv;
 
-import com.couchbase.client.core.deps.io.netty.util.AttributeKey;
+import io.netty.util.AttributeKey;
 import com.couchbase.client.core.env.SaslMechanism;
 
 import java.util.List;

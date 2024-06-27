@@ -25,7 +25,7 @@ import scala.collection.{Map => CMap, Set => CSet, mutable}
 import scala.language.dynamics
 import scala.util.control.NonFatal
 
-//import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.ObjectMapper
+//import com.fasterxml.jackson.databind.ObjectMapper
 
 import scala.jdk.CollectionConverters._
 

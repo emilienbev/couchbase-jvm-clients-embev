@@ -237,36 +237,36 @@
                     <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.2</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <!-- Last version to support Java 8 is 9.x -->
-                        <version>9.3</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <headerLocation>config/checkstyle/checkstyle-header.txt</headerLocation>
-                    <configLocation>config/checkstyle/checkstyle-basic.xml</configLocation>
-                    <suppressionsLocation>config/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--                <version>3.1.2</version>-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>com.puppycrawl.tools</groupId>-->
+<!--                        <artifactId>checkstyle</artifactId>-->
+<!--                        &lt;!&ndash; Last version to support Java 8 is 9.x &ndash;&gt;-->
+<!--                        <version>9.3</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--                <configuration>-->
+<!--                    <headerLocation>config/checkstyle/checkstyle-header.txt</headerLocation>-->
+<!--                    <configLocation>config/checkstyle/checkstyle-basic.xml</configLocation>-->
+<!--                    <suppressionsLocation>config/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>-->
+<!--                    <consoleOutput>true</consoleOutput>-->
+<!--                    <failsOnError>true</failsOnError>-->
+<!--                    <linkXRef>false</linkXRef>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>validate</id>-->
+<!--                        <phase>validate</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>check</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <!-- Want java-fit-performer to be executable.  Maven complains if use exec:java target as the dependencies of
               module aren't executable.  The workaround appears to be this - disable execution by default. -->
             <plugin>

@@ -1,7 +1,7 @@
 package com.couchbase.client.scala.kv
 
 import com.couchbase.client.core.api.kv.CoreSubdocMutateCommand
-import com.couchbase.client.core.deps.io.netty.util.CharsetUtil
+import io.netty.util.CharsetUtil
 import com.couchbase.client.core.msg.kv.{SubdocCommandType, SubdocMutateRequest}
 import com.couchbase.client.scala.codec.JsonSerializer
 import com.couchbase.client.scala.util.RowTraversalUtil

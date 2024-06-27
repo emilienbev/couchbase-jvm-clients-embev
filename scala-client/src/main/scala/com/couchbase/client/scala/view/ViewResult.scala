@@ -16,7 +16,7 @@
 
 package com.couchbase.client.scala.view
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.JsonNode
 import com.couchbase.client.core.logging.RedactableArgument.redactUser
 import com.couchbase.client.scala.codec.{Conversions, JsonDeserializer}
 import com.couchbase.client.scala.json.JsonObject

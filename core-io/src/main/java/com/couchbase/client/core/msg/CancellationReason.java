@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.msg;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.couchbase.client.core.retry.RetryReason;
 
 import java.util.Objects;

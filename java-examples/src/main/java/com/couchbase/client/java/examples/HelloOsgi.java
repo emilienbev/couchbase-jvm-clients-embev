@@ -16,8 +16,8 @@
 
 package com.couchbase.client.java.examples;
 
-import com.couchbase.client.core.deps.io.netty.util.internal.logging.InternalLoggerFactory;
-import com.couchbase.client.core.deps.io.netty.util.internal.logging.Slf4JLoggerFactory;
+import io.netty.util.internal.logging.InternalLoggerFactory;
+import io.netty.util.internal.logging.Slf4JLoggerFactory;
 import com.couchbase.client.core.env.Authenticator;
 import com.couchbase.client.core.env.PasswordAuthenticator;
 import com.couchbase.client.core.env.SeedNode;

@@ -18,8 +18,8 @@ package com.couchbase.client.kotlin.manager.user
 
 import com.couchbase.client.core.Core
 import com.couchbase.client.core.annotation.SinceCouchbase
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ArrayNode
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.node.ArrayNode
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.couchbase.client.core.env.PasswordAuthenticator
 import com.couchbase.client.core.error.CouchbaseException
 import com.couchbase.client.core.error.FeatureNotAvailableException

@@ -16,7 +16,7 @@
 
 package com.couchbase.client.java.collections.support;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Objects;
 /* Used in several datastructures tests.

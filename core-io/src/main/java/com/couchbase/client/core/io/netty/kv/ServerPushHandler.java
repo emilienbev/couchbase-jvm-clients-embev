@@ -17,10 +17,10 @@
 package com.couchbase.client.core.io.netty.kv;
 
 import com.couchbase.client.core.cnc.events.io.UnknownServerPushRequestReceivedEvent;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBufUtil;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelHandlerContext;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import com.couchbase.client.core.endpoint.EndpointContext;
 
 import static java.util.Objects.requireNonNull;

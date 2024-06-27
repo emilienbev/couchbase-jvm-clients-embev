@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.config;
 
-import com.couchbase.client.core.deps.io.netty.util.internal.ObjectUtil;
+import io.netty.util.internal.ObjectUtil;
 
 import java.util.Objects;
 

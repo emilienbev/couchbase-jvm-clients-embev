@@ -18,14 +18,14 @@ package com.couchbase.client.core.endpoint.http;
 
 import com.couchbase.client.core.Core;
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod;
+import io.netty.handler.codec.http.HttpMethod;
 import com.couchbase.client.core.msg.RequestTarget;
 
-import static com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod.DELETE;
-import static com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod.GET;
-import static com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod.PATCH;
-import static com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod.POST;
-import static com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod.PUT;
+import static io.netty.handler.codec.http.HttpMethod.DELETE;
+import static io.netty.handler.codec.http.HttpMethod.GET;
+import static io.netty.handler.codec.http.HttpMethod.PATCH;
+import static io.netty.handler.codec.http.HttpMethod.POST;
+import static io.netty.handler.codec.http.HttpMethod.PUT;
 import static java.util.Objects.requireNonNull;
 
 @Stability.Internal

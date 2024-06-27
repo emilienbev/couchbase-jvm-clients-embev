@@ -16,13 +16,13 @@
 
 package com.couchbase.client.core.json.stream;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonFactory;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonParser;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonToken;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.async.ByteArrayFeeder;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
-import com.couchbase.client.core.deps.io.netty.buffer.Unpooled;
-import com.couchbase.client.core.deps.io.netty.buffer.UnpooledByteBufAllocator;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.async.ByteArrayFeeder;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.buffer.UnpooledByteBufAllocator;
 import com.couchbase.client.core.error.DecodingFailureException;
 import com.couchbase.client.core.error.InvalidArgumentException;
 

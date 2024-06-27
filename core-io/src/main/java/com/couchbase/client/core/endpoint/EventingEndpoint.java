@@ -15,8 +15,8 @@
  */
 package com.couchbase.client.core.endpoint;
 
-import com.couchbase.client.core.deps.io.netty.channel.ChannelPipeline;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpClientCodec;
+import io.netty.channel.ChannelPipeline;
+import io.netty.handler.codec.http.HttpClientCodec;
 import com.couchbase.client.core.io.netty.NonChunkedHttpMessageHandler;
 import com.couchbase.client.core.io.netty.eventing.NonChunkedEventingMessageHandler;
 import com.couchbase.client.core.service.ServiceContext;

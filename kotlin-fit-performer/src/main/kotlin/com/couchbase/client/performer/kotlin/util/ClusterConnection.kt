@@ -16,7 +16,7 @@
 
 package com.couchbase.client.performer.kotlin.util
 
-import com.couchbase.client.core.deps.io.netty.handler.ssl.util.InsecureTrustManagerFactory
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory
 import com.couchbase.client.core.env.SecurityConfig
 import com.couchbase.client.kotlin.Cluster
 import com.couchbase.client.kotlin.Collection

@@ -18,7 +18,7 @@ package com.couchbase.client.core.protostellar;
 
 import com.couchbase.client.core.annotation.Stability;
 import com.couchbase.client.core.cnc.RequestSpan;
-import com.couchbase.client.core.deps.io.grpc.ManagedChannelBuilder;
+import io.grpc.ManagedChannelBuilder;
 
 @Stability.Internal
 public interface GrpcAwareRequestTracer {

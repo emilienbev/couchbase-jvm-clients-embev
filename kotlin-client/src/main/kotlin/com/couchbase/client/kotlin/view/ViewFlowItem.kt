@@ -16,8 +16,8 @@
 
 package com.couchbase.client.kotlin.view
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.couchbase.client.core.json.Mapper
 import com.couchbase.client.core.msg.view.ViewChunkHeader
 import com.couchbase.client.core.msg.view.ViewChunkTrailer

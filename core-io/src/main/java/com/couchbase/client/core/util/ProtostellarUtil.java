@@ -28,14 +28,14 @@ import java.util.Optional;
 public class ProtostellarUtil {
   private ProtostellarUtil() {}
 
-  public static com.couchbase.client.core.deps.com.google.protobuf.Duration convert(java.time.Duration input) {
-    return com.couchbase.client.core.deps.com.google.protobuf.Duration.newBuilder()
+  public static com.google.protobuf.Duration convert(java.time.Duration input) {
+    return com.google.protobuf.Duration.newBuilder()
       .setSeconds(input.getSeconds())
       .setNanos(input.getNano())
       .build();
   }
 
-  public static java.time.Duration convert(com.couchbase.client.core.deps.com.google.protobuf.Duration input) {
+  public static java.time.Duration convert(com.google.protobuf.Duration input) {
     return java.time.Duration.ofSeconds(input.getSeconds(), input.getNanos());
   }
 

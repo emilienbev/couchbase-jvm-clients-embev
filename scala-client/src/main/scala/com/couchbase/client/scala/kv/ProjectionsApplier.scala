@@ -2,7 +2,7 @@ package com.couchbase.client.scala.kv
 
 import com.couchbase.client.scala.codec.Conversions
 import com.couchbase.client.scala.json._
-import com.couchbase.client.core.deps.io.netty.util.CharsetUtil
+import io.netty.util.CharsetUtil
 import com.couchbase.client.core.projections.{
   JsonPathParser,
   PathArray,

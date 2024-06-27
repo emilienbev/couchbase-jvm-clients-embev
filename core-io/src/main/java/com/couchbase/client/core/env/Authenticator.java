@@ -17,10 +17,10 @@
 package com.couchbase.client.core.env;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.grpc.CallCredentials;
-import com.couchbase.client.core.deps.io.netty.channel.ChannelPipeline;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpRequest;
-import com.couchbase.client.core.deps.io.netty.handler.ssl.SslContextBuilder;
+import io.grpc.CallCredentials;
+import io.netty.channel.ChannelPipeline;
+import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.ssl.SslContextBuilder;
 import com.couchbase.client.core.endpoint.EndpointContext;
 import com.couchbase.client.core.service.ServiceType;
 import reactor.util.annotation.Nullable;

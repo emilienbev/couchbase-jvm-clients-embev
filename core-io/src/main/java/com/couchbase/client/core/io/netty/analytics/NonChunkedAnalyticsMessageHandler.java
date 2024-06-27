@@ -16,7 +16,7 @@
 
 package com.couchbase.client.core.io.netty.analytics;
 
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import com.couchbase.client.core.endpoint.BaseEndpoint;
 import com.couchbase.client.core.io.netty.NonChunkedHttpMessageHandler;
 import com.couchbase.client.core.msg.NonChunkedHttpRequest;

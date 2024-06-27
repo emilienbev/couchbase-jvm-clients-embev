@@ -16,8 +16,8 @@
 
 package com.couchbase.client.core.msg;
 
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.FullHttpRequest;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpResponse;
 import com.couchbase.client.core.error.HttpStatusCodeException;
 import com.couchbase.client.core.io.netty.HttpChannelContext;
 

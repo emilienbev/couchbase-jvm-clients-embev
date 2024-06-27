@@ -16,7 +16,7 @@
 
 package com.couchbase.client.java.view;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.couchbase.client.core.error.ViewServiceException;
 import com.couchbase.client.core.json.Mapper;
 import com.couchbase.client.core.json.MapperException;

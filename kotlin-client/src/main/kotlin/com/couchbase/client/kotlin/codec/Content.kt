@@ -17,8 +17,8 @@
 package com.couchbase.client.kotlin.codec
 
 import com.couchbase.client.core.api.kv.CoreEncodedContent
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBufUtil
-import com.couchbase.client.core.deps.io.netty.buffer.Unpooled
+import io.netty.buffer.ByteBufUtil
+import io.netty.buffer.Unpooled
 import com.couchbase.client.core.msg.kv.CodecFlags
 import com.couchbase.client.core.msg.kv.CodecFlags.hasCommonFormat
 import com.couchbase.client.kotlin.internal.toStringUtf8

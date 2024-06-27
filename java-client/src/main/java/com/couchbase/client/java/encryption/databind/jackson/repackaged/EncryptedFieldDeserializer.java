@@ -17,13 +17,13 @@
 package com.couchbase.client.java.encryption.databind.jackson.repackaged;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.JsonParser;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.BeanProperty;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.DeserializationContext;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JavaType;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JsonDeserializer;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.BeanProperty;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
 import com.couchbase.client.core.encryption.CryptoManager;
 import com.couchbase.client.java.encryption.annotation.Encrypted;
 

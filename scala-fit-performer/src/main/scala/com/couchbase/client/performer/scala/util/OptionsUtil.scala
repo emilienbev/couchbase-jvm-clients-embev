@@ -1,7 +1,7 @@
 package com.couchbase.client.performer.scala.util
 
 import com.couchbase.client.core.cnc.RequestSpan
-import com.couchbase.client.core.deps.io.netty.handler.ssl.util.InsecureTrustManagerFactory
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory
 import com.couchbase.client.core.msg.kv.DurabilityLevel
 import com.couchbase.client.core.retry.BestEffortRetryStrategy
 import com.couchbase.client.protocol.shared.{

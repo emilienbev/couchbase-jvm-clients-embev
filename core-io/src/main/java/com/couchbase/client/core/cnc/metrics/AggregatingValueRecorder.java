@@ -18,8 +18,8 @@ package com.couchbase.client.core.cnc.metrics;
 
 import com.couchbase.client.core.annotation.Stability;
 import com.couchbase.client.core.cnc.ValueRecorder;
-import com.couchbase.client.core.deps.org.HdrHistogram.Histogram;
-import com.couchbase.client.core.deps.org.LatencyUtils.LatencyStats;
+import org.HdrHistogram.Histogram;
+import org.LatencyUtils.LatencyStats;
 
 import java.util.Map;
 import java.util.Objects;

@@ -18,7 +18,7 @@ package com.couchbase.client.core.protostellar;
 import com.couchbase.client.core.CoreProtostellar;
 import com.couchbase.client.core.annotation.Stability;
 import com.couchbase.client.core.cnc.RequestSpan;
-import com.couchbase.client.core.deps.io.netty.util.Timeout;
+import io.netty.util.Timeout;
 import com.couchbase.client.core.msg.CancellationReason;
 import com.couchbase.client.core.msg.Request;
 import com.couchbase.client.core.msg.RequestContext;

@@ -16,7 +16,7 @@
 
 package com.couchbase.client.kotlin.codec
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.core.type.TypeReference
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

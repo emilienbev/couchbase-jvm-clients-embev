@@ -17,7 +17,7 @@
 package com.couchbase.client.java.manager.raw;
 
 import com.couchbase.client.core.Core;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpRequest;
 import com.couchbase.client.core.msg.manager.GenericManagerRequest;
 import com.couchbase.client.core.service.ServiceType;
 import com.couchbase.client.java.Bucket;

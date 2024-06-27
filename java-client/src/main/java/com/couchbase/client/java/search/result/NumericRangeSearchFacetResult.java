@@ -17,7 +17,7 @@ package com.couchbase.client.java.search.result;
 
 import com.couchbase.client.core.annotation.Stability;
 import com.couchbase.client.core.api.search.result.CoreNumericRangeSearchFacetResult;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 import java.util.stream.Collectors;

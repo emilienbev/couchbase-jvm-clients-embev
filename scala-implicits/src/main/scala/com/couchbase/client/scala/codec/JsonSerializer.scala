@@ -15,7 +15,7 @@
  */
 package com.couchbase.client.scala.codec
 
-import com.couchbase.client.core.deps.io.netty.util.CharsetUtil
+import io.netty.util.CharsetUtil
 import com.couchbase.client.scala.json.{JsonArray, JsonArraySafe, JsonObject, JsonObjectSafe}
 import com.couchbase.client.scala.kv.MutateInMacro
 import com.couchbase.client.scala.transformers.JacksonTransformers

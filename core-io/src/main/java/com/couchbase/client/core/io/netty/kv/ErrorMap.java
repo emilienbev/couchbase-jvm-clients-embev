@@ -16,13 +16,13 @@
 
 package com.couchbase.client.core.io.netty.kv;
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonCreator;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonValue;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.DeserializationFeature;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.ObjectReader;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.couchbase.client.core.json.Mapper;
 
 import java.io.IOException;

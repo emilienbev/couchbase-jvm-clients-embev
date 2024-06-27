@@ -17,7 +17,7 @@
 package com.couchbase.client.java.manager.raw;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.netty.handler.codec.http.HttpMethod;
+import io.netty.handler.codec.http.HttpMethod;
 import com.couchbase.client.core.service.ServiceType;
 import com.couchbase.client.java.Cluster;
 

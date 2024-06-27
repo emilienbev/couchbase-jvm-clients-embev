@@ -17,7 +17,7 @@ package com.couchbase.client.core.protostellar;
 
 import com.couchbase.client.core.CoreProtostellar;
 import com.couchbase.client.core.api.kv.CoreAsyncResponse;
-import com.couchbase.client.core.deps.io.grpc.stub.StreamObserver;
+import io.grpc.stub.StreamObserver;
 import com.couchbase.client.core.endpoint.ProtostellarEndpoint;
 import com.couchbase.client.core.msg.CancellationReason;
 import com.couchbase.client.core.retry.ProtostellarRequestBehaviour;

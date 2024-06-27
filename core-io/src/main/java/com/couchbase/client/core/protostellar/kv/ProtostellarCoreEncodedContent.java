@@ -17,7 +17,7 @@
 package com.couchbase.client.core.protostellar.kv;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.com.google.protobuf.ByteString;
+import com.google.protobuf.ByteString;
 
 import static java.util.Objects.requireNonNull;
 

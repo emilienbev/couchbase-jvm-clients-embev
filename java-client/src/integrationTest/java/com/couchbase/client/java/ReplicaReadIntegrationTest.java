@@ -17,7 +17,7 @@
 package com.couchbase.client.java;
 
 import com.couchbase.client.core.cnc.events.request.IndividualReplicaGetFailedEvent;
-import com.couchbase.client.core.deps.com.google.common.collect.Sets;
+import com.google.common.collect.Sets;
 import com.couchbase.client.core.error.DocumentNotFoundException;
 import com.couchbase.client.core.error.DocumentUnretrievableException;
 import com.couchbase.client.core.error.UnambiguousTimeoutException;

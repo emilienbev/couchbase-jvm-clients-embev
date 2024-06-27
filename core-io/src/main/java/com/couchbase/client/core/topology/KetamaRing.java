@@ -17,8 +17,8 @@
 package com.couchbase.client.core.topology;
 
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.deps.io.netty.buffer.ByteBuf;
-import com.couchbase.client.core.deps.io.netty.buffer.Unpooled;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import com.couchbase.client.core.node.MemcachedHashingStrategy;
 
 import java.security.MessageDigest;
