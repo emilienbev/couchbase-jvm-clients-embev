@@ -76,8 +76,6 @@ public class QuarkusPerformer extends JavaPerformer {
   public void clusterConnectionClose(ClusterConnectionCloseRequest request,
                                      StreamObserver<ClusterConnectionCloseResponse> responseObserver) {
     super.clusterConnectionClose(request, responseObserver);
-    var hello = new com.couchbase.client.core.env.VersionAndGitHash();
-    var test = Cluster.connect()
   }
 
   @Override
