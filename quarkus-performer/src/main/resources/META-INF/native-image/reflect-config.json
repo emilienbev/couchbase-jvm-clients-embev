@@ -1,0 +1,13 @@
+[
+  {
+    "name": "com.google.protobuf.Duration",
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.couchbase.client.core.env.VersionAndGitHash",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allPublicMethods": true
+  }
+]
