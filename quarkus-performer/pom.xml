@@ -15,6 +15,7 @@
         <quarkus.platform.version>3.15.1</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.3.1</surefire-plugin.version>
+        <shaded.package.prefix>com.couchbase.client.core.deps.</shaded.package.prefix>
     </properties>
 
     <dependencyManagement>
@@ -106,12 +107,12 @@
             </exclusions>
         </dependency>
 <!--        End-->
-        <dependency>
-            <groupId>com.google.api.grpc</groupId>
-            <artifactId>proto-google-common-protos</artifactId>
-            <version>2.46.0</version>
-            <scope>compile</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.google.api.grpc</groupId>-->
+<!--            <artifactId>proto-google-common-protos</artifactId>-->
+<!--            <version>2.46.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>com.google.protobuf</groupId>-->
 <!--            <artifactId>protobuf-java</artifactId>-->
@@ -134,7 +135,6 @@
 
 
 <!--        telemetry stuff-->
-
         <dependency>
             <groupId>io.opentelemetry.instrumentation</groupId>
             <artifactId>opentelemetry-grpc-1.6</artifactId>
@@ -151,12 +151,12 @@
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-exporter-otlp</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>*</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>*</groupId>-->
+<!--                    <artifactId>*</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>io.opentelemetry</groupId>
@@ -165,13 +165,11 @@
 
 <!--        end-->
 
-
-
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-netty-shaded</artifactId>
-            <version>1.65.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.grpc</groupId>-->
+<!--            <artifactId>grpc-netty-shaded</artifactId>-->
+<!--            <version>1.65.1</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
