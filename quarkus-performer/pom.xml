@@ -67,7 +67,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-<!--end-->
+<!--        end       -->
 <!--        Opentelemetry imports-->
         <dependency>
             <groupId>com.couchbase.client</groupId>
@@ -85,6 +85,12 @@
             <groupId>com.couchbase.client</groupId>
             <artifactId>metrics-opentelemetry</artifactId>
             <version>0.5.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.couchbase.client</groupId>
+                    <artifactId>core-io</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
