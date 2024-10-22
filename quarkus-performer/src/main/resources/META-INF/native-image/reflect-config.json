@@ -1,0 +1,11 @@
+[
+  {
+    "name" : "grpc.reflection.v1alpha.Reflection$FileDescriptorResponse",
+    "methods" : [
+      {
+        "name" : "emptyList",
+        "parameterTypes" : ["java.lang.Class"]
+      }
+    ]
+  }
+]

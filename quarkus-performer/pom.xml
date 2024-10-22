@@ -15,6 +15,8 @@
         <quarkus.platform.version>3.15.1</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.3.1</surefire-plugin.version>
+        <grpc.version>1.64.0</grpc.version>
+        <protoc.version>3.22.2</protoc.version>
     </properties>
 
     <dependencyManagement>
@@ -54,20 +56,52 @@
         </dependency>
 
 <!--        proto files-->
-        <dependency>
-            <groupId>com.couchbase.client</groupId>
-            <artifactId>fit-grpc</artifactId>
-            <!-- The SNAPSHOT here should not be removed. This package is internal to FIT and will never release -->
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>*</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.couchbase.client</groupId>-->
+<!--            <artifactId>fit-grpc</artifactId>-->
+<!--            &lt;!&ndash; The SNAPSHOT here should not be removed. This package is internal to FIT and will never release &ndash;&gt;-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>*</groupId>-->
+<!--                    <artifactId>*</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
 <!--        end       -->
+
+        <dependency>
+            <groupId>com.google.api.grpc</groupId>
+            <artifactId>proto-google-common-protos</artifactId>
+            <version>2.41.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.22.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>1.64.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-api</artifactId>
+            <version>1.64.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf-lite</artifactId>
+            <version>1.64.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-javalite</artifactId>
+            <version>3.22.2</version>
+        </dependency>
+
+
 <!--        Opentelemetry imports-->
         <dependency>
             <groupId>com.couchbase.client</groupId>
@@ -78,6 +112,10 @@
                     <groupId>com.couchbase.client</groupId>
                     <artifactId>core-io</artifactId>
                 </exclusion>
+<!--                <exclusion>-->
+<!--                    <groupId>io.opentelemetry.instrumentation</groupId>-->
+<!--                    <artifactId></artifactId>-->
+<!--                </exclusion>-->
             </exclusions>
         </dependency>
 
@@ -94,8 +132,21 @@
         </dependency>
 
         <dependency>
+            <groupId>io.opentelemetry.instrumentation</groupId>
+            <artifactId>opentelemetry-instrumentation-api-semconv</artifactId>
+            <version>1.31.0-alpha</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.opentelemetry.instrumentation</groupId>
+            <artifactId>opentelemetry-instrumentation-api</artifactId>
+            <version>1.31.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-api</artifactId>
+            <version>1.39.0</version>
         </dependency>
 
         <dependency>
@@ -107,12 +158,57 @@
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-sdk</artifactId>
         </dependency>
-<!--        end-->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+        <!--        end-->
 
     </dependencies>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.0</version>
+            </extension>
+        </extensions>
         <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-shade-plugin</artifactId>-->
+<!--                <version>3.6.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>shade</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <createSourcesJar>true</createSourcesJar>-->
+<!--                            <shadeSourcesContent>true</shadeSourcesContent>-->
+<!--                            <artifactSet>-->
+<!--                                <includes>-->
+<!--&lt;!&ndash;                                    <include>com.google.api.grpc:proto-google-common-protos</include>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <include>com.google.protobuf:protobuf-java:jar</include>&ndash;&gt;-->
+<!--                                    <include>com.couchbase.client:core-io-deps</include>-->
+<!--                                </includes>-->
+<!--                            </artifactSet>-->
+<!--&lt;!&ndash;                            <relocations>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <relocation>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <pattern>com.google.api.grpc</pattern>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <shadedPattern>com.couchbase.client.core.deps.com.google.rpc</shadedPattern>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </relocation>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <relocation>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <pattern>com.google.protobuf</pattern>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <shadedPattern>com.couchbase.client.core.deps.com.google.protobuf</shadedPattern>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </relocation>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </relocations>&ndash;&gt;-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>${quarkus.platform.group-id}</groupId>
                 <artifactId>quarkus-maven-plugin</artifactId>
@@ -122,8 +218,8 @@
                     <execution>
                         <goals>
                             <goal>build</goal>
-                            <goal>generate-code</goal>
-                            <goal>generate-code-tests</goal>
+<!--                            <goal>generate-code</goal>-->
+<!--                            <goal>generate-code-tests</goal>-->
                             <goal>native-image-agent</goal>
                         </goals>
                     </execution>
@@ -164,6 +260,42 @@
                         <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <configuration>
+                    <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+                    <protocPlugins>
+                        <protocPlugin>
+                            <id>quarkus-grpc-protoc-plugin</id>
+                            <groupId>io.quarkus</groupId>
+                            <artifactId>quarkus-grpc-protoc-plugin</artifactId>
+                            <version>${quarkus.platform.version}</version>
+                            <mainClass>io.quarkus.grpc.protoc.plugin.MutinyGrpcGenerator</mainClass>
+                        </protocPlugin>
+                    </protocPlugins>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <goals>
+                            <goal>test-compile</goal>
+                            <goal>test-compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
