@@ -20,6 +20,8 @@ import com.couchbase.JavaSdkCommandExecutor;
 import com.couchbase.client.core.cnc.RequestSpan;
 import com.couchbase.client.core.cnc.tracing.NoopRequestTracer;
 // [if:3.5.1]
+//import com.couchbase.client.core.deps.io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import com.couchbase.client.core.deps.io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import com.couchbase.client.core.endpoint.CircuitBreakerConfig;
 // [end]
 import com.couchbase.client.core.env.IoConfig;
@@ -55,7 +57,7 @@ import com.couchbase.client.protocol.shared.Durability;
 import com.couchbase.client.protocol.transactions.TransactionCreateRequest;
 import com.couchbase.client.protocol.transactions.TransactionQueryOptions;
 import com.couchbase.client.tracing.opentelemetry.OpenTelemetryRequestTracer;
-import io.grpc.netty.shaded.io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+//import io.grpc.netty.shaded.io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.opentelemetry.exporter.otlp.metrics.OtlpGrpcMetricExporter;
 import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
