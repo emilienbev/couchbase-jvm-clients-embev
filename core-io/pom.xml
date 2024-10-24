@@ -246,9 +246,7 @@
                             org.slf4j,
                             org.slf4j.*,
                             reactor.*,
-                            org.reactivestreams.*,
-                            com.google.protobuf;resolution:=optional,
-                            com.google.protobuf.nano;resolution:=optional
+                            org.reactivestreams.*
                         </Import-Package>
                         <_exportcontents>*</_exportcontents>
                     </instructions>

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "com.couchbase.client.core.deps.com.google.rpc.ErrorInfo",
+    "methods": [
+      {
+        "name": "parseFrom",
+        "parameterTypes": ["com.couchbase.client.core.deps.com.google.protobuf.ByteString"]
+      }
+    ]
+  }
+]
