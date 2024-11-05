@@ -20,8 +20,6 @@ import com.couchbase.JavaTransactionCommandExecutor;
 import com.couchbase.ReactiveJavaSdkCommandExecutor;
 import com.couchbase.client.core.cnc.RequestSpan;
 import com.couchbase.client.core.io.CollectionIdentifier;
-import com.couchbase.client.core.logging.LogRedaction;
-import com.couchbase.client.core.logging.RedactionLevel;
 // [if:3.3.0]
 import com.couchbase.client.core.transaction.cleanup.TransactionsCleaner;
 import com.couchbase.client.core.transaction.cleanup.ClientRecord;
@@ -40,6 +38,18 @@ import com.couchbase.client.core.transaction.forwards.CoreTransactionsSupportedE
 import com.couchbase.client.core.cnc.events.transaction.TransactionCleanupAttemptEvent;
 import com.couchbase.client.core.transaction.log.CoreTransactionLogger;
 import com.couchbase.client.java.transactions.config.TransactionsConfig;
+import com.couchbase.client.performer.core.metrics.MetricsReporter;
+import com.couchbase.client.performer.core.perf.HorizontalScalingThread;
+import com.couchbase.client.performer.core.perf.PerRun;
+import com.couchbase.client.performer.core.perf.WorkloadStreamingThread;
+import com.couchbase.client.performer.core.perf.WorkloadsRunner;
+import com.couchbase.client.performer.core.stream.StreamerOwner;
+import com.couchbase.client.protocol.PerformerServiceGrpc;
+import com.couchbase.client.protocol.performer.PerformerCapsFetchRequest;
+import com.couchbase.client.protocol.streams.CancelRequest;
+import com.couchbase.client.protocol.streams.CancelResponse;
+import com.couchbase.client.protocol.streams.RequestItemsRequest;
+import com.couchbase.client.protocol.streams.RequestItemsResponse;
 import com.couchbase.client.protocol.transactions.CleanupSet;
 import com.couchbase.client.protocol.transactions.CleanupSetFetchRequest;
 import com.couchbase.client.protocol.transactions.CleanupSetFetchResponse;
@@ -84,20 +94,18 @@ import com.couchbase.client.protocol.shared.EchoResponse;
 import com.couchbase.utils.Capabilities;
 import com.couchbase.utils.ClusterConnection;
 import com.couchbase.utils.OptionsUtil;
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
+import io.smallrye.common.annotation.Blocking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Hooks;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
@@ -110,7 +118,7 @@ import static com.couchbase.client.java.transactions.internal.TransactionsSuppor
 // [end]
 
 @GrpcService
-public class QuarkusPerformer extends CorePerformer {
+public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplBase {
   private static final Logger logger = LoggerFactory.getLogger(QuarkusPerformer.class);
   private static final ConcurrentHashMap<String, ClusterConnection> clusterConnections = new ConcurrentHashMap<>();
   private static final ConcurrentHashMap<String, RequestSpan> spans = new ConcurrentHashMap<>();
@@ -118,15 +126,18 @@ public class QuarkusPerformer extends CorePerformer {
   // Allows capturing various errors so we can notify the driver of problems.
   public static AtomicReference<String> globalError = new AtomicReference<>();
 
-  @Override
+  private final StreamerOwner streamerOwner = new StreamerOwner();
+
+  public QuarkusPerformer() {
+    streamerOwner.start();
+  }
+
   protected SdkCommandExecutor executor(com.couchbase.client.protocol.run.Workloads workloads, Counters counters, API api) {
     var connection = clusterConnections.get(workloads.getClusterConnectionId());
     return api == API.DEFAULT
       ? new JavaSdkCommandExecutor(connection, counters, spans)
       : new ReactiveJavaSdkCommandExecutor(connection, counters, spans);
   }
-
-  @Override
   protected TransactionCommandExecutor transactionsExecutor(com.couchbase.client.protocol.run.Workloads workloads, Counters counters) {
     // [if:3.3.0]
     var connection = clusterConnections.get(workloads.getClusterConnectionId());
@@ -136,7 +147,6 @@ public class QuarkusPerformer extends CorePerformer {
     // [end]
   }
 
-  @Override
   protected void customisePerformerCaps(PerformerCapsFetchResponse.Builder response) {
     response.addAllSdkImplementationCaps(Capabilities.sdkImplementationCaps());
     var sdkVersion = VersionUtil.introspectSDKVersionJava();
@@ -211,6 +221,7 @@ public class QuarkusPerformer extends CorePerformer {
   }
 
   @Override
+  @Blocking
   public void clusterConnectionCreate(ClusterConnectionCreateRequest request,
                                       StreamObserver<ClusterConnectionCreateResponse> responseObserver) {
     try {
@@ -273,6 +284,7 @@ public class QuarkusPerformer extends CorePerformer {
 
   // [if:3.3.0]
   @Override
+  @Blocking
   public void transactionCreate(TransactionCreateRequest request,
                                 StreamObserver<TransactionResult> responseObserver) {
     try {
@@ -300,6 +312,7 @@ public class QuarkusPerformer extends CorePerformer {
   // [end]
 
   @Override
+  @Blocking
   public  void echo(EchoRequest request , StreamObserver<EchoResponse> responseObserver){
     try {
       logger.info("================ {} : {} ================ ", request.getTestName(), request.getMessage());
@@ -312,6 +325,7 @@ public class QuarkusPerformer extends CorePerformer {
   }
 
   @Override
+  @Blocking
   public void disconnectConnections(DisconnectConnectionsRequest request, StreamObserver<DisconnectConnectionsResponse> responseObserver) {
     try {
       logger.info("Closing all {} connections from performer to cluster", clusterConnections.size());
@@ -329,6 +343,7 @@ public class QuarkusPerformer extends CorePerformer {
 
   // [if:3.3.0]
   @Override
+  @Blocking
   public StreamObserver<TransactionStreamDriverToPerformer> transactionStream(
     StreamObserver<TransactionStreamPerformerToDriver> toTest) {
     var marshaller = new TwoWayTransactionMarshaller(clusterConnections, spans);
@@ -343,6 +358,7 @@ public class QuarkusPerformer extends CorePerformer {
 
   // [if:3.3.0]
   @Override
+  @Blocking
   public void transactionCleanup(TransactionCleanupRequest request,
                                  StreamObserver<TransactionCleanupAttempt> responseObserver) {
     try {
@@ -407,6 +423,7 @@ public class QuarkusPerformer extends CorePerformer {
   }
 
   @Override
+  @Blocking
   public void clientRecordProcess(ClientRecordProcessRequest request,
                                   StreamObserver<ClientRecordProcessResponse> responseObserver) {
     try {
@@ -458,6 +475,7 @@ public class QuarkusPerformer extends CorePerformer {
   }
 
   @Override
+  @Blocking
   public void transactionSingleQuery(TransactionSingleQueryRequest request,
                                      StreamObserver<TransactionSingleQueryResponse> responseObserver) {
     try {
@@ -502,6 +520,7 @@ public class QuarkusPerformer extends CorePerformer {
   // [end]
 
   @Override
+  @Blocking
   public void spanCreate(SpanCreateRequest request, StreamObserver<SpanCreateResponse> responseObserver) {
     var parent = request.hasParentSpanId()
       ? spans.get(request.getParentSpanId())
@@ -532,6 +551,7 @@ public class QuarkusPerformer extends CorePerformer {
   }
 
   @Override
+  @Blocking
   public void spanFinish(SpanFinishRequest request, StreamObserver<SpanFinishResponse> responseObserver) {
     // [if:3.1.6]
     spans.get(request.getId()).end();
@@ -543,5 +563,113 @@ public class QuarkusPerformer extends CorePerformer {
 
   public static ClusterConnection getClusterConnection(@Nullable String clusterConnectionId) {
     return clusterConnections.get(clusterConnectionId);
+  }
+
+  //CorePerformer methods
+
+  @Override
+  @Blocking
+  public void performerCapsFetch(PerformerCapsFetchRequest request, StreamObserver<PerformerCapsFetchResponse> responseObserver) {
+    var builder = PerformerCapsFetchResponse.newBuilder()
+      .addSupportedApis(API.DEFAULT) // blocking only for now
+      .addPerformerCaps(Caps.GRPC_TESTING)
+      // Add any shared caps here that all 3 performers possess:
+      .addPerformerCaps(Caps.KV_SUPPORT_1)
+      .addSdkImplementationCaps(com.couchbase.client.protocol.sdk.Caps.WAIT_UNTIL_READY)
+      .addSdkImplementationCaps(com.couchbase.client.protocol.sdk.Caps.PROTOSTELLAR)
+      .addSdkImplementationCaps(com.couchbase.client.protocol.sdk.Caps.SDK_SEARCH_RFC_REVISION_11)
+      .addSdkImplementationCaps(com.couchbase.client.protocol.sdk.Caps.SDK_INDEX_MANAGEMENT_RFC_REVISION_25);
+
+    customisePerformerCaps(builder);
+
+    responseObserver.onNext(builder.build());
+    responseObserver.onCompleted();
+  }
+
+  @Override
+  @Blocking
+  public void run(com.couchbase.client.protocol.run.Request request,
+                  StreamObserver<com.couchbase.client.protocol.run.Result> responseObserver) {
+    try {
+      request.getTunablesMap().forEach((k, v) -> {
+        logger.info("Setting tunable {}={}", k, v);
+        if (v != null) {
+          System.setProperty(k, v);
+        }
+      });
+
+      // A runId lets us find streams created by this run
+      var runId = UUID.randomUUID().toString();
+
+      if (!request.hasWorkloads()) {
+        throw new UnsupportedOperationException("Not workloads");
+      }
+
+      var counters = new Counters();
+      var sdkExecutor = executor(request.getWorkloads(), counters, API.DEFAULT);
+      @Nullable var sdkExecutorReactive = executor(request.getWorkloads(), counters, API.ASYNC);
+      @Nullable var transactionsExecutor = transactionsExecutor(request.getWorkloads(), counters);
+
+      var writer = new WorkloadStreamingThread(responseObserver, request.getConfig());
+      writer.start();
+
+      MetricsReporter metrics = null;
+      if (request.hasConfig()
+        && request.getConfig().hasStreamingConfig()
+        && request.getConfig().getStreamingConfig().getEnableMetrics()) {
+        metrics = new MetricsReporter(writer);
+        metrics.start();
+      }
+
+      try (var perRun = new PerRun(runId, writer, counters, streamerOwner, metrics)) {
+        WorkloadsRunner.run(request.getWorkloads(),
+          perRun,
+          (x) -> new HorizontalScalingThread(x, sdkExecutor, sdkExecutorReactive, transactionsExecutor));
+      }
+
+      responseObserver.onCompleted();
+    }
+    catch (UnsupportedOperationException err) {
+      responseObserver.onError(Status.UNIMPLEMENTED.withDescription(err.toString()).asException());
+    } catch (Exception err) {
+      responseObserver.onError(Status.UNKNOWN.withDescription(err.toString()).asException());
+    } finally {
+      request.getTunablesMap().forEach((k, v) -> {
+        logger.info("Clearing property {}", k);
+        System.clearProperty(k);
+      });
+
+    }
+  }
+
+  @Override
+  @Blocking
+  public void streamCancel(CancelRequest request, StreamObserver<CancelResponse> responseObserver) {
+    try {
+      streamerOwner.cancel(request);
+      responseObserver.onNext(CancelResponse.getDefaultInstance());
+      responseObserver.onCompleted();
+    }
+    catch (UnsupportedOperationException err) {
+      responseObserver.onError(Status.UNIMPLEMENTED.withDescription(err.toString()).asException());
+    } catch (RuntimeException err) {
+      responseObserver.onError(Status.UNKNOWN.withDescription(err.toString()).asException());
+    }
+
+  }
+
+  @Override
+  @Blocking
+  public void streamRequestItems(RequestItemsRequest request, StreamObserver<RequestItemsResponse> responseObserver) {
+    try {
+      streamerOwner.requestItems(request);
+      responseObserver.onNext(RequestItemsResponse.getDefaultInstance());
+      responseObserver.onCompleted();
+    }
+    catch (UnsupportedOperationException err) {
+      responseObserver.onError(Status.UNIMPLEMENTED.withDescription(err.toString()).asException());
+    } catch (RuntimeException err) {
+      responseObserver.onError(Status.UNKNOWN.withDescription(err.toString()).asException());
+    }
   }
 }

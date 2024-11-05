@@ -16,7 +16,7 @@
 
     <properties>
         <!-- when updating grpc version, check to see if it's still necessary to pin Guava to a later version -->
-        <grpc.version>1.65.1</grpc.version>
+        <grpc.version>1.66.0</grpc.version>
         <grpc.protoc.version>3.25.5</grpc.protoc.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -61,7 +61,7 @@
         <dependency>
             <groupId>com.google.api.grpc</groupId>
             <artifactId>proto-google-common-protos</artifactId>
-            <version>2.46.0</version>
+            <version>2.41.0</version>
         </dependency>
 
         <!--Needed on Windows for annotations-->
