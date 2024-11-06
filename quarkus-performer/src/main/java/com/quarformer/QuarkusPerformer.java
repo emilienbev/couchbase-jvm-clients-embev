@@ -93,9 +93,10 @@ import com.couchbase.client.protocol.shared.EchoRequest;
 import com.couchbase.client.protocol.shared.EchoResponse;
 import com.couchbase.utils.Capabilities;
 import com.couchbase.utils.ClusterConnection;
-import com.couchbase.utils.OptionsUtil;
+//import com.couchbase.utils.QOptionsUtil;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
+import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
 import io.quarkus.grpc.GrpcService;
 import io.smallrye.common.annotation.Blocking;
 import org.slf4j.Logger;
@@ -246,7 +247,7 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
         });
       });
 
-      var clusterEnvironment = OptionsUtil.convertClusterConfig(request, getCluster, onClusterConnectionClose);
+      var clusterEnvironment = QOptionsUtil.convertClusterConfig(request, getCluster, onClusterConnectionClose);
 
       var connection = new ClusterConnection(request.getClusterHostname(),
         request.getClusterUsername(),
