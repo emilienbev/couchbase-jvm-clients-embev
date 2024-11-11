@@ -1,0 +1,8 @@
+[
+  { "interfaces":
+  [
+    "com.couchbase.client.core.api.kv.CoreKvBinaryOps",
+    "com.couchbase.client.core.api.kv.CoreKvOps"
+  ]
+  }
+]

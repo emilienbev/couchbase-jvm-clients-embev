@@ -67,6 +67,7 @@ import com.couchbase.transactions.SingleQueryTransactionExecutor;
 import com.couchbase.twoway.TwoWayTransactionBlocking;
 import com.couchbase.twoway.TwoWayTransactionMarshaller;
 import com.couchbase.twoway.TwoWayTransactionReactive;
+import com.couchbase.utils.OptionsUtil;
 import com.couchbase.utils.ResultsUtil;
 import com.couchbase.utils.HooksUtil;
 // [end]
@@ -78,7 +79,6 @@ import com.couchbase.client.protocol.observability.SpanFinishResponse;
 import com.couchbase.client.protocol.performer.Caps;
 import com.couchbase.client.performer.core.commands.TransactionCommandExecutor;
 import com.couchbase.client.protocol.shared.Collection;
-import com.couchbase.client.performer.core.CorePerformer;
 import com.couchbase.client.performer.core.commands.SdkCommandExecutor;
 import com.couchbase.client.performer.core.perf.Counters;
 import com.couchbase.client.protocol.performer.PerformerCapsFetchResponse;
@@ -94,6 +94,7 @@ import com.couchbase.client.protocol.shared.EchoResponse;
 import com.couchbase.utils.Capabilities;
 import com.couchbase.utils.ClusterConnection;
 //import com.couchbase.utils.QOptionsUtil;
+import com.couchbase.utils.UserSchedulerUtil;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
@@ -215,7 +216,7 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
     response.addPerformerCaps(Caps.CLUSTER_CONFIG_INSECURE);
     // Some observability options blocks changed name here
     // [if:3.2.0]
-    response.addPerformerCaps(Caps.OBSERVABILITY_1);
+//    response.addPerformerCaps(Caps.OBSERVABILITY_1);
     // [end]
     response.addPerformerCaps(Caps.TIMING_ON_FAILED_OPS);
     response.setPerformerUserAgent("java-sdk");
@@ -247,7 +248,13 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
         });
       });
 
-      var clusterEnvironment = QOptionsUtil.convertClusterConfig(request, getCluster, onClusterConnectionClose);
+      var clusterEnvironment = OptionsUtil.convertClusterConfig(request, getCluster, onClusterConnectionClose);
+
+      // [if:3.7.5] first version that allows specifying custom publishOn scheduler
+      var userExecutorAndScheduler = UserSchedulerUtil.userExecutorAndScheduler();
+      onClusterConnectionClose.add(userExecutorAndScheduler::dispose);
+      clusterEnvironment.publishOnScheduler(userExecutorAndScheduler::scheduler);
+      // [end]
 
       var connection = new ClusterConnection(request.getClusterHostname(),
         request.getClusterUsername(),
