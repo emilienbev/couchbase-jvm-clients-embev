@@ -219,7 +219,7 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
 //    response.addPerformerCaps(Caps.OBSERVABILITY_1);
     // [end]
     response.addPerformerCaps(Caps.TIMING_ON_FAILED_OPS);
-    response.setPerformerUserAgent("java-sdk");
+    response.setPerformerUserAgent("quarkus-java");
   }
 
   @Override
@@ -251,9 +251,9 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
       var clusterEnvironment = OptionsUtil.convertClusterConfig(request, getCluster, onClusterConnectionClose);
 
       // [if:3.7.5] first version that allows specifying custom publishOn scheduler
-      var userExecutorAndScheduler = UserSchedulerUtil.userExecutorAndScheduler();
-      onClusterConnectionClose.add(userExecutorAndScheduler::dispose);
-      clusterEnvironment.publishOnScheduler(userExecutorAndScheduler::scheduler);
+//      var userExecutorAndScheduler = UserSchedulerUtil.userExecutorAndScheduler();
+//      onClusterConnectionClose.add(userExecutorAndScheduler::dispose);
+//      clusterEnvironment.publishOnScheduler(userExecutorAndScheduler::scheduler);
       // [end]
 
       var connection = new ClusterConnection(request.getClusterHostname(),
