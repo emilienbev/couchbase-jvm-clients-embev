@@ -37,6 +37,7 @@ import com.couchbase.client.core.transaction.forwards.CoreTransactionsSupportedE
 // [end]
 import com.couchbase.client.core.cnc.events.transaction.TransactionCleanupAttemptEvent;
 import com.couchbase.client.core.transaction.log.CoreTransactionLogger;
+import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.transactions.config.TransactionsConfig;
 import com.couchbase.client.performer.core.metrics.MetricsReporter;
 import com.couchbase.client.performer.core.perf.HorizontalScalingThread;
@@ -100,6 +101,7 @@ import io.grpc.stub.StreamObserver;
 import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
 import io.quarkus.grpc.GrpcService;
 import io.smallrye.common.annotation.Blocking;
+import jakarta.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Hooks;
@@ -129,6 +131,9 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
   public static AtomicReference<String> globalError = new AtomicReference<>();
 
   private final StreamerOwner streamerOwner = new StreamerOwner();
+
+  @Inject
+  Cluster quarkusCluster;
 
   public QuarkusPerformer() {
     streamerOwner.start();
@@ -216,10 +221,10 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
     response.addPerformerCaps(Caps.CLUSTER_CONFIG_INSECURE);
     // Some observability options blocks changed name here
     // [if:3.2.0]
-//    response.addPerformerCaps(Caps.OBSERVABILITY_1);
+//    response.addPerformerCaps(Caps.OBSERVABILITY_1); TODO: DISABLED
     // [end]
     response.addPerformerCaps(Caps.TIMING_ON_FAILED_OPS);
-    response.setPerformerUserAgent("quarkus-java");
+    response.setPerformerUserAgent("java-sdk");
   }
 
   @Override
@@ -256,11 +261,23 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
 //      clusterEnvironment.publishOnScheduler(userExecutorAndScheduler::scheduler);
       // [end]
 
-      var connection = new ClusterConnection(request.getClusterHostname(),
-        request.getClusterUsername(),
-        request.getClusterPassword(),
-        clusterEnvironment,
-        onClusterConnectionClose);
+      ClusterConnection connection = null;
+
+      if (clusterConnectionId.startsWith("defaultCluster")) {
+        logger.info("Using Quarkus injected Cluster for defaultCluster connection");
+        connection = new ClusterConnection(request.getClusterHostname(),
+          request.getClusterUsername(),
+          request.getClusterPassword(),
+          clusterEnvironment,
+          onClusterConnectionClose,
+          quarkusCluster);
+      } else {
+        connection = new ClusterConnection(request.getClusterHostname(),
+          request.getClusterUsername(),
+          request.getClusterPassword(),
+          clusterEnvironment,
+          onClusterConnectionClose);
+      }
       clusterConnections.put(clusterConnectionId, connection);
       logger.info("Created cluster connection {} for user {}, now have {}",
         clusterConnectionId, request.getClusterUsername(), clusterConnections.size());
@@ -503,6 +520,8 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
     }
   }
 
+  @Override
+  @Blocking
   public void cleanupSetFetch(CleanupSetFetchRequest request, StreamObserver<CleanupSetFetchResponse> responseObserver) {
     try {
       var connection = getClusterConnection(request.getClusterConnectionId());

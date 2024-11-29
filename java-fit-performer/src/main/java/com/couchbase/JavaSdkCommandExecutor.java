@@ -1110,7 +1110,7 @@ public class JavaSdkCommandExecutor extends SdkCommandExecutor {
             if (opts.hasBatchByteLimit()) out.batchByteLimit(opts.getBatchByteLimit());
             if (opts.hasBatchItemLimit()) out.batchItemLimit(opts.getBatchItemLimit());
             // Presumably will be added soon, but not currently in Java SDK
-            if (opts.hasBatchTimeLimit()) throw new UnsupportedOperationException();
+            //if (opts.hasBatchTimeLimit()) throw new UnsupportedOperationException();
             return out;
         }
         else return null;

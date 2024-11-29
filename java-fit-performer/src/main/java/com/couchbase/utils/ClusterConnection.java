@@ -39,6 +39,8 @@ public class ClusterConnection {
     // the same lifetime.
     private final List<Runnable> onClusterConnectionClose;
 
+    private boolean isQuarkus = false;
+
     public ClusterConnection(String hostname,
                              String username,
                              String password,
@@ -58,6 +60,28 @@ public class ClusterConnection {
 
         this.cluster = Cluster.connect(hostname, co);
     }
+
+  public ClusterConnection(String hostname,
+                           String username,
+                           String password,
+                           @Nullable ClusterEnvironment.Builder config,
+                           ArrayList<Runnable> onClusterConnectionClose,
+                           Cluster quarkusCluster) {
+    this.username = username;
+    this.onClusterConnectionClose = onClusterConnectionClose;
+
+    var co = ClusterOptions.clusterOptions(username, password);
+    if (config != null) {
+      this.config = config.build();
+      co.environment(this.config);
+    }
+    else {
+      this.config = null;
+    }
+
+    this.cluster = quarkusCluster;
+    this.isQuarkus = true;
+  }
 
     public Cluster cluster(){
         return cluster;
@@ -103,11 +127,13 @@ public class ClusterConnection {
     }
 
     public void close() {
+      if (!isQuarkus) {
         cluster.disconnect();
         if (config != null) {
-            config.shutdown();
+          config.shutdown();
         }
         onClusterConnectionClose.forEach(Runnable::run);
+      }
     }
 
     public void waitUntilReady(CollectionIdentifier collection) {
