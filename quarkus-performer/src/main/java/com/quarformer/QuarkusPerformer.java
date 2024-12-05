@@ -21,6 +21,8 @@ import com.couchbase.ReactiveJavaSdkCommandExecutor;
 import com.couchbase.client.core.cnc.RequestSpan;
 import com.couchbase.client.core.io.CollectionIdentifier;
 // [if:3.3.0]
+import com.couchbase.client.core.logging.LogRedaction;
+import com.couchbase.client.core.logging.RedactionLevel;
 import com.couchbase.client.core.transaction.cleanup.TransactionsCleaner;
 import com.couchbase.client.core.transaction.cleanup.ClientRecord;
 import com.couchbase.client.core.transaction.cleanup.ClientRecordDetails;
@@ -136,7 +138,9 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
   Cluster quarkusCluster;
 
   public QuarkusPerformer() {
+    LogRedaction.setRedactionLevel(RedactionLevel.PARTIAL);
     streamerOwner.start();
+
   }
 
   protected SdkCommandExecutor executor(com.couchbase.client.protocol.run.Workloads workloads, Counters counters, API api) {
@@ -263,7 +267,8 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
 
       ClusterConnection connection = null;
 
-      if (clusterConnectionId.startsWith("defaultCluster")) {
+//      clusterConnectionId.startsWith("defaultCluster"
+      if (false) {
         logger.info("Using Quarkus injected Cluster for defaultCluster connection");
         connection = new ClusterConnection(request.getClusterHostname(),
           request.getClusterUsername(),

@@ -3,6 +3,8 @@ package com.quarformer;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection(targets={
+  com.couchbase.client.java.query.QueryProfile.class,
+  //
   com.couchbase.client.protocol.transactions.ErrorClass.class,
   com.couchbase.client.protocol.transactions.ErrorWrapper.class,
   com.couchbase.client.core.transaction.util.CoreTransactionAttemptContextHooks.class,
