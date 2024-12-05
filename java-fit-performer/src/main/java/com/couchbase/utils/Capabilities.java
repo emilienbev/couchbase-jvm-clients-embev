@@ -84,6 +84,14 @@ public class Capabilities {
         out.add(Caps.SDK_VECTOR_SEARCH_BASE64);
         // [end]
 
+        // [if:3.7.4]
+        out.add(Caps.SDK_ZONE_AWARE_READ_FROM_REPLICA);
+        // [end]
+
+        // [if:3.7.6]
+        out.add(Caps.SDK_OBSERVABILITY_CLUSTER_LABELS);
+        // [end]
+
         return out;
     }
 }

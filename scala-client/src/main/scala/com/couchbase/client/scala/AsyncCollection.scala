@@ -62,11 +62,11 @@ private[scala] case class HandlerParams(
     collectionIdentifier: CollectionIdentifier,
     env: ClusterEnvironment
 ) {
-  def tracer = env.coreEnv.requestTracer()
+  def tracer = core.coreResources.requestTracer
 }
 
 private[scala] case class HandlerBasicParams(core: Core) {
-  def tracer = core.context.environment.requestTracer
+  def tracer = core.context.coreResources.requestTracer
 }
 
 /** Provides asynchronous access to all collection APIs, based around Scala `Future`s.  This is the main entry-point
@@ -497,8 +497,7 @@ class AsyncCollection(
   ): Future[GetReplicaResult] = {
     convert(
       kvOps.getAnyReplicaReactive(makeCommonOptions(timeout), id, CoreReadPreference.NO_PREFERENCE)
-    ).map(result => convertReplica(result, environment, None))
-      .toFuture
+    ).map(result => convertReplica(result, environment, None)).toFuture
   }
 
   /** Retrieves any available version of the document.
@@ -588,8 +587,7 @@ class AsyncCollection(
         LookupInSpec.map(spec).asJava,
         CoreReadPreference.NO_PREFERENCE
       )
-    ).map(result => convertLookupInReplica(result, environment))
-      .toFuture
+    ).map(result => convertLookupInReplica(result, environment)).toFuture
   }
 
   /** SubDocument lookups allow retrieving parts of a JSON document directly, which may be more efficient than

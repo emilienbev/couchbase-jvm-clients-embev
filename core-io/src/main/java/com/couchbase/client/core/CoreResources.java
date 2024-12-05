@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Couchbase, Inc.
+ * Copyright (c) 2024 Couchbase, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.couchbase.client.core.transaction.context;
+package com.couchbase.client.core;
 
-import com.couchbase.client.core.Core;
 import com.couchbase.client.core.annotation.Stability;
-import com.couchbase.client.core.cnc.Meter;
+import com.couchbase.client.core.api.CoreCouchbaseOps;
+import com.couchbase.client.core.cnc.RequestTracer;
 
 /**
- * Holds transactions state that has the same lifetime as a Core.
- *
- * Other transactions components (such as cleanup) will be moved here in future.
+ * Resources that are owned by a {@link CoreCouchbaseOps}.  (E.g. either a {@link Core} or {@link CoreProtostellar}.
+ * <p>
+ * It is explicitly not owned by a CoreEnvironment, which can be shared between multiple Cluster objects, and so is not suitable for any information
+ * tied to a CoreCouchbaseOps.
+ * <p>
+ * Consider preferring adding new resources here rather than into the *Environment objects.
  */
 @Stability.Internal
-public class CoreTransactionsContext {
-  private final CoreTransactionsCounters counters;
-
-  public CoreTransactionsContext(Core core, Meter meter) {
-    this.counters = new CoreTransactionsCounters(core, meter);
-  }
-
-  public CoreTransactionsCounters counters() {
-    return counters;
-  }
+public interface CoreResources {
+  RequestTracer requestTracer();
 }

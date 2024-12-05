@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Couchbase, Inc.
+ * Copyright (c) 2024 Couchbase, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.couchbase.client.core.topology;
 
-package com.couchbase.client.core.cnc.metrics;
+import com.couchbase.client.core.config.ClusterConfig;
+import reactor.util.annotation.Nullable;
 
-import com.couchbase.client.core.cnc.Counter;
+public class ClusterIdentifierUtil {
+  private ClusterIdentifierUtil() {}
 
-public class NoopCounter implements Counter {
-
-  public static final NoopCounter INSTANCE = new NoopCounter();
-
-  @Override
-  public void incrementBy(long number) {
-
+  public static @Nullable ClusterIdentifier fromConfig(@Nullable ClusterConfig config) {
+    return config == null ? null : config.globalConfig() == null ? null : config.globalConfig().clusterIdent();
   }
 }

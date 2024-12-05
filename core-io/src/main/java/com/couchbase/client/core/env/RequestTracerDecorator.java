@@ -16,29 +16,41 @@
 
 package com.couchbase.client.core.env;
 
+import com.couchbase.client.core.annotation.Stability;
 import com.couchbase.client.core.cnc.RequestSpan;
 import com.couchbase.client.core.cnc.RequestTracer;
 import com.couchbase.client.core.cnc.TracingIdentifiers;
+import com.couchbase.client.core.topology.ClusterIdentifier;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.Nullable;
 
 import java.time.Duration;
+import java.util.function.Supplier;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Applies a set of common attributes to spans created by this tracer.
+ * Wraps a {@link RequestTracer} to provide new attributes.
  */
-class RequestTracerWithCommonAttributes implements RequestTracer {
+@Stability.Internal
+public class RequestTracerDecorator implements RequestTracer {
   private final RequestTracer wrapped;
+  private final Supplier<ClusterIdentifier> clusterIdentSupplier;
 
-  RequestTracerWithCommonAttributes(RequestTracer wrapped) {
+  public RequestTracerDecorator(RequestTracer wrapped, Supplier<ClusterIdentifier> clusterIdentSupplier) {
     this.wrapped = requireNonNull(wrapped);
+    this.clusterIdentSupplier = clusterIdentSupplier;
   }
 
   @Override
   public RequestSpan requestSpan(String name, RequestSpan parent) {
     RequestSpan span = wrapped.requestSpan(name, parent);
     span.lowCardinalityAttribute(TracingIdentifiers.ATTR_SYSTEM, TracingIdentifiers.ATTR_SYSTEM_COUCHBASE);
+    ClusterIdentifier clusterIdent = clusterIdentSupplier.get();
+    if (clusterIdent != null) {
+      span.attribute(TracingIdentifiers.ATTR_CLUSTER_NAME, clusterIdent.clusterName());
+      span.attribute(TracingIdentifiers.ATTR_CLUSTER_UUID, clusterIdent.clusterUuid());
+    }
     return span;
   }
 

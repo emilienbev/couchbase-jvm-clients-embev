@@ -179,14 +179,14 @@ public class TwoWayTransactionBlocking extends TwoWayTransactionShared {
                                 request.getDocId().getDocId(),
                                 content);
                     }
-                    // [start:3.6.2]
+                    // [if:3.6.2]
                     else {
                         ctx.insert(collection,
                                 request.getDocId().getDocId(),
                                 content,
                                 options);
                     }
-                    // [start:3.6.2]
+                    // [end]
                 });
         } else if (op.hasInsertV2()) {
             var request = op.getInsertV2();
@@ -258,11 +258,18 @@ public class TwoWayTransactionBlocking extends TwoWayTransactionShared {
                             if (!stashedGetMap.containsKey(request.getUseStashedSlot())) {
                                 throw new IllegalStateException("Do not have a stashed get in slot " + request.getUseStashedSlot());
                             }
-                            ctx.replace(stashedGetMap.get(request.getUseStashedSlot()), content);
+                            if (options == null) {
+                                ctx.replace(stashedGetMap.get(request.getUseStashedSlot()), content);
+                            }
+                            // [start:3.6.2]
+                            else {
+                                ctx.replace(stashedGetMap.get(request.getUseStashedSlot()), content, options);
+                            }
+                            // [end:3.6.2]
                         } else {
                             var collection = connection.collection(request.getLocation());
                             var r = ctx.get(collection, executor.getDocId(request.getLocation()));
-                            if (options != null) {
+                            if (options == null) {
                                 ctx.replace(r, content);
                             }
                             // [start:3.6.2]
@@ -324,7 +331,7 @@ public class TwoWayTransactionBlocking extends TwoWayTransactionShared {
             performOperation(dbg + "get " + request.getDocId().getDocId(), ctx, request.getExpectedResultList(), op.getDoNotPropagateError(), performanceMode,
                     () -> {
                         logger.info("{} Performing get operation on {} on bucket {} on collection {}", dbg, request.getDocId().getDocId(),request.getDocId().getBucketName(),request.getDocId().getCollectionName());
-                        TransactionGetResult out;
+                        TransactionGetResult out = null;
                         if (options == null) {
                             out = ctx.get(collection, request.getDocId().getDocId());
                         }
@@ -332,7 +339,10 @@ public class TwoWayTransactionBlocking extends TwoWayTransactionShared {
                         else {
                             out = ctx.get(collection, request.getDocId().getDocId(), options);
                         }
-                        handleGetResult(request, out, connection, request.hasContentAsValidation() ? request.getContentAsValidation() : null);
+                        // [end:3.6.2]
+                        if (out != null) {
+                            handleGetResult(request, out, connection, request.hasContentAsValidation() ? request.getContentAsValidation() : null);
+                        }
                     });
         } else if (op.hasGetV2()) {
             var request = op.getGetV2();
@@ -374,6 +384,25 @@ public class TwoWayTransactionBlocking extends TwoWayTransactionShared {
                         }
                         handleGetOptionalResult(request, req, out, connection, request.hasContentAsValidation() ? request.getContentAsValidation() : null);
                     });
+        // [if:3.7.4]
+        } else if (op.hasGetFromPreferredServerGroup()) {
+            var request = op.getGetFromPreferredServerGroup();
+            var collection = connection.collection(request.getDocId());
+            var options = TransactionOptionsUtil.transactionGetReplicaFromPreferredServerGroupOptions(request);
+
+            performOperation(dbg + "getFromPreferredServerGroup " + request.getDocId().getDocId(), ctx, request.getExpectedResultList(), op.getDoNotPropagateError(), performanceMode,
+                    () -> {
+                        logger.info("{} Performing getFromPreferredServerGroup operation on {} on bucket {} on collection {}", dbg, request.getDocId().getDocId(),request.getDocId().getBucketName(),request.getDocId().getCollectionName());
+                        TransactionGetResult out;
+                        if (options == null) {
+                            out = ctx.getReplicaFromPreferredServerGroup(collection, request.getDocId().getDocId());
+                        }
+                        else {
+                            out = ctx.getReplicaFromPreferredServerGroup(collection, request.getDocId().getDocId(), options);
+                        }
+                        handleGetReplicaFromPreferredServerGroupResult(request, out, request.hasContentAsValidation() ? request.getContentAsValidation() : null);
+                    });
+        // [end]
         } else if (op.hasWaitOnLatch()) {
             final CommandWaitOnLatch request = op.getWaitOnLatch();
             final String latchName = request.getLatchName();

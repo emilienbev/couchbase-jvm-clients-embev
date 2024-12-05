@@ -36,6 +36,7 @@ import com.couchbase.client.core.classic.query.ClassicCoreQueryOps;
 import com.couchbase.client.core.cnc.CbTracing;
 import com.couchbase.client.core.cnc.Event;
 import com.couchbase.client.core.cnc.EventBus;
+import com.couchbase.client.core.cnc.RequestTracer;
 import com.couchbase.client.core.cnc.TracingIdentifiers;
 import com.couchbase.client.core.cnc.ValueRecorder;
 import com.couchbase.client.core.cnc.events.core.BucketClosedEvent;
@@ -63,6 +64,7 @@ import com.couchbase.client.core.diagnostics.WaitUntilReadyHelper;
 import com.couchbase.client.core.endpoint.http.CoreHttpClient;
 import com.couchbase.client.core.env.Authenticator;
 import com.couchbase.client.core.env.CoreEnvironment;
+import com.couchbase.client.core.env.RequestTracerDecorator;
 import com.couchbase.client.core.env.SeedNode;
 import com.couchbase.client.core.error.AlreadyShutdownException;
 import com.couchbase.client.core.error.ConfigException;
@@ -91,6 +93,8 @@ import com.couchbase.client.core.node.ViewLocator;
 import com.couchbase.client.core.service.ServiceScope;
 import com.couchbase.client.core.service.ServiceState;
 import com.couchbase.client.core.service.ServiceType;
+import com.couchbase.client.core.topology.ClusterIdentifier;
+import com.couchbase.client.core.topology.ClusterIdentifierUtil;
 import com.couchbase.client.core.topology.ClusterTopology;
 import com.couchbase.client.core.topology.ClusterTopologyWithBucket;
 import com.couchbase.client.core.topology.NodeIdentifier;
@@ -238,7 +242,8 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
   private final Disposable invalidStateWatchdog;
 
   /**
-   * Holds the response metrics per
+   * Holds the response metrics.
+   * Note that because tags have to be provided on ValueRecorder creation, every unique combination of tags needs to be represented in the ResponseMetricIdentifier key.
    */
   private final Map<ResponseMetricIdentifier, ValueRecorder> responseMetrics = new ConcurrentHashMap<>();
 
@@ -247,6 +252,8 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
   private final CoreTransactionsContext transactionsContext;
 
   private final ConnectionString connectionString;
+
+  private final CoreResources coreResources;
 
   /**
    * @deprecated Please use {@link #create(CoreEnvironment, Authenticator, ConnectionString)} instead.
@@ -285,6 +292,24 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
     CoreLimiter.incrementAndVerifyNumInstances(environment.eventBus());
 
     this.connectionString = requireNonNull(connectionString);
+    boolean ignoresAttributes = CbTracing.isInternalTracer(environment.requestTracer());
+    RequestTracer requestTracerDecoratedIfRequired = ignoresAttributes
+      ? environment.requestTracer()
+      : new RequestTracerDecorator(environment.requestTracer(), () -> {
+      if (currentConfig == null) {
+        return null;
+      }
+      if (currentConfig.globalConfig() == null) {
+        return null;
+      }
+      return currentConfig.globalConfig().clusterIdent();
+    });
+    this.coreResources = new CoreResources() {
+      @Override
+      public RequestTracer requestTracer() {
+        return requestTracerDecoratedIfRequired;
+      }
+    };
     this.coreContext = new CoreContext(this, CoreIdGenerator.nextId(), environment, authenticator);
     this.configurationProvider = createConfigurationProvider();
     this.nodes = new CopyOnWriteArrayList<>();
@@ -324,7 +349,7 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
     );
 
     this.transactionsCleanup = new CoreTransactionsCleanup(this, environment.transactionsConfig());
-    this.transactionsContext = new CoreTransactionsContext(environment.meter());
+    this.transactionsContext = new CoreTransactionsContext(this, environment.meter());
     context().environment().eventBus().publish(new TransactionsStartedEvent(environment.transactionsConfig().cleanupConfig().runLostAttemptsCleanupThread(),
             environment.transactionsConfig().cleanupConfig().runRegularAttemptsCleanupThread()));
   }
@@ -605,9 +630,10 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
       }
     }
     final String finalExceptionSimpleName = exceptionSimpleName;
+    final ClusterIdentifier clusterIdent = ClusterIdentifierUtil.fromConfig(currentConfig);
 
-    return responseMetrics.computeIfAbsent(new ResponseMetricIdentifier(request, exceptionSimpleName), key -> {
-      Map<String, String> tags = new HashMap<>(7);
+    return responseMetrics.computeIfAbsent(new ResponseMetricIdentifier(request, exceptionSimpleName, clusterIdent), key -> {
+      Map<String, String> tags = new HashMap<>(9);
       if (key.serviceType == null) {
         // Virtual service
         if (request instanceof CoreTransactionRequest) {
@@ -621,9 +647,21 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
       // The LoggingMeter only uses the service and operation labels, so optimise this hot-path by skipping
       // assigning other labels.
       if (!isDefaultLoggingMeter) {
-          tags.put(TracingIdentifiers.ATTR_NAME, key.bucketName);
-          tags.put(TracingIdentifiers.ATTR_SCOPE, key.scopeName);
-          tags.put(TracingIdentifiers.ATTR_COLLECTION, key.collectionName);
+        // Crucial note for Micrometer:
+        // If we are ever going to output an attribute from a given JVM run then we must always
+        // output that attribute in this run.  Specifying null as an attribute value allows the OTel backend to strip it, and
+        // the Micrometer backend to provide a default value.
+        // See (internal to Couchbase) discussion here for full details:
+        // https://issues.couchbase.com/browse/CBSE-17070?focusedId=779820&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-779820
+        // If this rule is not followed, then Micrometer will silently discard some metrics.  Micrometer requires that
+        // every value output under a given metric has the same set of attributes.
+
+        tags.put(TracingIdentifiers.ATTR_NAME, key.bucketName);
+        tags.put(TracingIdentifiers.ATTR_SCOPE, key.scopeName);
+        tags.put(TracingIdentifiers.ATTR_COLLECTION, key.collectionName);
+
+        tags.put(TracingIdentifiers.ATTR_CLUSTER_UUID, key.clusterUuid);
+        tags.put(TracingIdentifiers.ATTR_CLUSTER_NAME, key.clusterName);
 
         if (finalExceptionSimpleName != null) {
           tags.put(TracingIdentifiers.ATTR_OUTCOME, finalExceptionSimpleName);
@@ -969,6 +1007,12 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
     return context().environment();
   }
 
+  @Stability.Internal
+  @Override
+  public CoreResources coreResources() {
+    return coreResources;
+  }
+
   @Override
   public CompletableFuture<Void> waitUntilReady(
     Set<ServiceType> serviceTypes,
@@ -988,8 +1032,10 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
     private final @Nullable String scopeName;
     private final @Nullable String collectionName;
     private final @Nullable String exceptionSimpleName;
+    private final @Nullable String clusterName;
+    private final @Nullable String clusterUuid;
 
-    ResponseMetricIdentifier(final Request<?> request, @Nullable String exceptionSimpleName) {
+    ResponseMetricIdentifier(final Request<?> request, @Nullable String exceptionSimpleName, @Nullable ClusterIdentifier clusterIdent) {
       this.exceptionSimpleName = exceptionSimpleName;
       if (request.serviceType() == null) {
         if (request instanceof CoreTransactionRequest) {
@@ -1002,6 +1048,8 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
         this.serviceType = CbTracing.getTracingId(request.serviceType());
       }
       this.requestName = request.name();
+      this.clusterName = clusterIdent == null ? null : clusterIdent.clusterName();
+      this.clusterUuid = clusterIdent == null ? null : clusterIdent.clusterUuid();
       if (request instanceof KeyValueRequest) {
         KeyValueRequest<?> kv = (KeyValueRequest<?>) request;
         bucketName = request.bucket();
@@ -1036,6 +1084,8 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
       this.scopeName = null;
       this.collectionName = null;
       this.exceptionSimpleName = null;
+      this.clusterName = null;
+      this.clusterUuid = null;
     }
 
     public String serviceType() {
@@ -1056,12 +1106,14 @@ public class Core implements CoreCouchbaseOps, AutoCloseable {
         && Objects.equals(bucketName, that.bucketName)
         && Objects.equals(scopeName, that.scopeName)
         && Objects.equals(collectionName, that.collectionName)
-        && Objects.equals(exceptionSimpleName, that.exceptionSimpleName);
+        && Objects.equals(exceptionSimpleName, that.exceptionSimpleName)
+        && Objects.equals(clusterName, that.clusterName)
+        && Objects.equals(clusterUuid, that.clusterUuid);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(serviceType, requestName, bucketName, scopeName, collectionName, exceptionSimpleName);
+      return Objects.hash(serviceType, requestName, bucketName, scopeName, collectionName, exceptionSimpleName, clusterName, clusterUuid);
     }
   }
 

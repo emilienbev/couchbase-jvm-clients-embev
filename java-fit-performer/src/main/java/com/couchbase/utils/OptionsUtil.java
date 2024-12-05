@@ -153,6 +153,12 @@ public class OptionsUtil {
             if (cc.hasObservabilityConfig()) {
                 applyObservabilityConfig(clusterEnvironment, cc, onClusterConnectionClose);
             }
+
+            if (cc.hasPreferredServerGroup()) {
+              // [if:3.7.4]
+              clusterEnvironment.preferredServerGroup(cc.getPreferredServerGroup());
+              // [end]
+            }
         }
 
         return clusterEnvironment;
@@ -601,6 +607,10 @@ public class OptionsUtil {
 
             if (qo.hasScanWaitMillis()) {
                 queryOptions.scanWait(Duration.ofMillis(qo.getScanWaitMillis()));
+            }
+
+            if (qo.hasClientContextId()) {
+              queryOptions.clientContextId(qo.getClientContextId());
             }
         }
         return queryOptions;
