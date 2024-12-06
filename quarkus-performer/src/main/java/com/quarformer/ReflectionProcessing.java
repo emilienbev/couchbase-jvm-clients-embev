@@ -4,6 +4,9 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection(targets={
   com.couchbase.client.java.query.QueryProfile.class,
+  com.couchbase.client.protocol.hooks.transactions.HookPoint.class,
+  com.couchbase.client.protocol.hooks.transactions.HookCondition.class,
+  com.couchbase.client.protocol.hooks.transactions.HookAction.class,
   //
   com.couchbase.client.protocol.transactions.ErrorClass.class,
   com.couchbase.client.protocol.transactions.ErrorWrapper.class,

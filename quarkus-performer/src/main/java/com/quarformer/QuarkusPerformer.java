@@ -134,9 +134,6 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
 
   private final StreamerOwner streamerOwner = new StreamerOwner();
 
-  @Inject
-  Cluster quarkusCluster;
-
   public QuarkusPerformer() {
     LogRedaction.setRedactionLevel(RedactionLevel.PARTIAL);
     streamerOwner.start();
@@ -225,7 +222,7 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
     response.addPerformerCaps(Caps.CLUSTER_CONFIG_INSECURE);
     // Some observability options blocks changed name here
     // [if:3.2.0]
-//    response.addPerformerCaps(Caps.OBSERVABILITY_1); TODO: DISABLED
+//    response.addPerformerCaps(Caps.OBSERVABILITY_1); TODO: DISABLED ON PURPOSE
     // [end]
     response.addPerformerCaps(Caps.TIMING_ON_FAILED_OPS);
     response.setPerformerUserAgent("java-sdk");
@@ -259,30 +256,19 @@ public class QuarkusPerformer extends PerformerServiceGrpc.PerformerServiceImplB
 
       var clusterEnvironment = OptionsUtil.convertClusterConfig(request, getCluster, onClusterConnectionClose);
 
+      //TODO: Removed for Quarkus
+      //
       // [if:3.7.5] first version that allows specifying custom publishOn scheduler
 //      var userExecutorAndScheduler = UserSchedulerUtil.userExecutorAndScheduler();
 //      onClusterConnectionClose.add(userExecutorAndScheduler::dispose);
 //      clusterEnvironment.publishOnScheduler(userExecutorAndScheduler::scheduler);
       // [end]
 
-      ClusterConnection connection = null;
-
-//      clusterConnectionId.startsWith("defaultCluster"
-      if (false) {
-        logger.info("Using Quarkus injected Cluster for defaultCluster connection");
-        connection = new ClusterConnection(request.getClusterHostname(),
-          request.getClusterUsername(),
-          request.getClusterPassword(),
-          clusterEnvironment,
-          onClusterConnectionClose,
-          quarkusCluster);
-      } else {
-        connection = new ClusterConnection(request.getClusterHostname(),
-          request.getClusterUsername(),
-          request.getClusterPassword(),
-          clusterEnvironment,
-          onClusterConnectionClose);
-      }
+      var connection = new ClusterConnection(request.getClusterHostname(),
+        request.getClusterUsername(),
+        request.getClusterPassword(),
+        clusterEnvironment,
+        onClusterConnectionClose);
       clusterConnections.put(clusterConnectionId, connection);
       logger.info("Created cluster connection {} for user {}, now have {}",
         clusterConnectionId, request.getClusterUsername(), clusterConnections.size());
