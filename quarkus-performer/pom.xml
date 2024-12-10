@@ -49,6 +49,11 @@
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-sdk</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!--   from docs     -->
         <dependency>
             <groupId>io.opentelemetry.instrumentation</groupId>
